@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/include_title"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/gray2">
+            <!--购物车头部1 没有商品展示-->
+            <LinearLayout
+                android:id="@+id/ll_none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white1"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/_margin"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/gwc1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="购物车空空如也"
+                    android:textColor="@color/gray1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="去挑自己满意的商品吧"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/gray1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_margin"
+                    android:layout_marginBottom="@dimen/_margin"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_margin"
+                        android:paddingRight="@dimen/_margin"
+                        android:paddingTop="@dimen/_high_small"
+                        android:paddingBottom="@dimen/_high_small"
+                        android:background="@drawable/text_background_gray"
+                        android:textColor="@color/text_color"
+                        android:text="进入商城"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/_high"
+                        android:paddingLeft="@dimen/_margin"
+                        android:paddingRight="@dimen/_margin"
+                        android:paddingTop="@dimen/_high_small"
+                        android:paddingBottom="@dimen/_high_small"
+                        android:textColor="@color/white1"
+                        android:background="@drawable/text_background_yellow1"
+                        android:text="查看收藏"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!--购物车头部2 有商品展示-->
+            <LinearLayout
+                android:id="@+id/layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white1"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <!--为您推荐-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white1"
+                android:paddingBottom="@dimen/_margin"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/_margin"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="为你推荐"
+                        android:layout_marginLeft="@dimen/_high_small"
+                        android:layout_marginRight="@dimen/_high_small"
+                        android:textColor="@color/yellow1"/>
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="2dp"
+                        android:background="@color/yellow1"/>
+                </LinearLayout>
+
+                <com.yuqi.admin.py.view.MultiGridView
+                    android:id="@+id/gwc_gv"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:divider="@color/transparent"
+                    android:numColumns="2"
+                    android:layout_marginRight="@dimen/_margin"
+                    android:layout_marginLeft="@dimen/_margin"
+                    android:horizontalSpacing="10dp"
+                    android:verticalSpacing="10dp"/>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

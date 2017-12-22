@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoopView">
+        <attr name="lineColor" format="color"/>
+        <attr name="topBottomTextColor" format="color"/>
+        <attr name="centerTextColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="canLoop" format="boolean"/>
+        <attr name="initPosition" format="integer"/>
+        <attr name="drawItemCount" format="integer"/>
+    </declare-styleable>
+        <declare-styleable name="roundedimageview">
+            <attr name="border_thickness" format="dimension" />
+            <attr name="border_inside_color" format="color" />
+            <attr name="border_outside_color" format="color"></attr>
+        </declare-styleable>
+    <declare-styleable name="MyListView">
+        <attr name="view_background" format="color"/>
+    </declare-styleable>
+</resources>

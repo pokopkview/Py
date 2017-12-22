@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white1"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/rl11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow1"
+            android:orientation="horizontal">
+            <!--搜索区域-->
+            <LinearLayout
+                android:id="@+id/ll_ss"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/_margin"
+                android:layout_marginLeft="@dimen/_margin"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@mipmap/sss"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/text_centre"
+                    android:textColor="#cdcdcd"
+                    android:hint="海之蓝"
+                    android:textColorHint="@color/gray1"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="@dimen/simple_btn_height"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="取消"/>
+        </LinearLayout>
+
+        <!--热搜-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_margin"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热搜"
+            android:textSize="@dimen/text_centre1"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray2"/>
+
+    <!--历史搜索-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_margin"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史搜索"
+            android:textSize="@dimen/text_centre1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

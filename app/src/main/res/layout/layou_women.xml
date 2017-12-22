@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <include layout="@layout/include_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/gray1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white1"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="@dimen/simple_text_height"
+                            android:text="预存款项"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:textColor="@color/white1"
+                            android:background="@color/text_color"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:text="网络基础建设"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:hint="请输入您的基础建设"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="朋友聚汇-预充值"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的预存金额"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="策划-人员-拍摄-制作"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的预存金额"/>
+
+
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="@dimen/simple_text_height"
+                            android:text="填写信息"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:textColor="@color/white1"
+                            android:background="@color/text_color"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:text="公司名称"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的公司名称"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="姓名"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的真实姓名"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="电话"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的真实手机号码"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="地址"/>
+
+                        <EditText
+                            style="@style/EditText_"
+                            android:layout_margin="0dp"
+                            android:hint="请输入您的公司地址"/>
+
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="@dimen/title_height"
+                            android:background="@color/yellow1"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="提交"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:textSize="@dimen/text_large"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:background="@color/gray1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="邮箱： pengmh@yuibest.com" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="手机： 136-2180-1679" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电话： 021-599669330  400-9651-681" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_margin"
+        android:background="@color/gray2"/>
+    <include layout="@layout/include_but"/>
+</LinearLayout>
