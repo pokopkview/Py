@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.yuqi.admin.py.BaseActivity;
 import com.yuqi.admin.py.ObserverManager;
 import com.yuqi.admin.py.R;
-import com.yuqi.admin.py.ThridSale;
+import com.yuqi.admin.py.wxapi.ThridSale;
 import com.yuqi.admin.py.adapter.ShangPinAdapter;
 import com.yuqi.admin.py.bean.ShoppingCarBean;
 import com.yuqi.admin.py.view.MultiGridView;

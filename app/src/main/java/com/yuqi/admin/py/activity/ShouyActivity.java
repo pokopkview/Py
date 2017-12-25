@@ -57,7 +57,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
     private CycleViewPager cycleViewPager;
 
     /**综合、手机、洗护、箱包、食品、家用*/
-    private TextView sy_zh,sy_sj,sy_xh,sy_xb,sy_sp,sy_jy;
+    private TextView sy_zh,sy_dq,sy_sj,sy_xh,sy_xb,sy_sp,sy_jy;
     private ShangPinAdapter spAdapter;
     private ShangPinzhAdapter spZhAdapter;
     private MultiGridView sjLv;
@@ -97,6 +97,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
         sjLv = (MultiGridView) findViewById(R.id.list);
 
         sy_zh = (TextView)findViewById(R.id.sy_zh1);
+        sy_dq = (TextView)findViewById(R.id.sy_dq1);
         sy_sj = (TextView)findViewById(R.id.sy_sj1);
         sy_xh = (TextView)findViewById(R.id.sy_xh1);
         sy_xb = (TextView)findViewById(R.id.sy_xb1);
@@ -203,22 +204,18 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
             case R.id.bt_shouye:
 //                intent = new Intent(ShouyActivity.this, WomActivity.class);
 //                startActivity(intent);
-                finish();
                 break;
             case R.id.bt_yuqi:
                 intent = new Intent(ShouyActivity.this, YuqActivity.class);
                 startActivity(intent);
-//                finish();
                 break;
             case R.id.bt_anli:
                 intent = new Intent(ShouyActivity.this, AnliActivity.class);
                 startActivity(intent);
-//                finish();
                 break;
             case R.id.bt_women:
                 intent = new Intent(ShouyActivity.this, WomActivity.class);
                 startActivity(intent);
-//                finish();
                 break;
             case R.id.grzx:
                 intent = new Intent(ShouyActivity.this, SPersonalCenterActivity.class);
@@ -243,6 +240,18 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
             case R.id.sy_zh1://商品类型
                 commodity = "综合";
                 sy_zh.setTextColor(Color.parseColor("#f4a100"));
+                sy_dq.setTextColor(Color.parseColor("#262626"));
+                sy_sj.setTextColor(Color.parseColor("#262626"));
+                sy_xh.setTextColor(Color.parseColor("#262626"));
+                sy_xb.setTextColor(Color.parseColor("#262626"));
+                sy_sp.setTextColor(Color.parseColor("#262626"));
+                sy_jy.setTextColor(Color.parseColor("#262626"));
+                Commodity(commodity);
+                break;
+            case R.id.sy_dq1:
+                commodity = "电器";
+                sy_zh.setTextColor(Color.parseColor("#262626"));
+                sy_dq.setTextColor(Color.parseColor("#f4a100"));
                 sy_sj.setTextColor(Color.parseColor("#262626"));
                 sy_xh.setTextColor(Color.parseColor("#262626"));
                 sy_xb.setTextColor(Color.parseColor("#262626"));
@@ -254,6 +263,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
                 commodity = "手机";
                 Commodity(commodity);
                 sy_zh.setTextColor(Color.parseColor("#262626"));
+                sy_dq.setTextColor(Color.parseColor("#262626"));
                 sy_sj.setTextColor(Color.parseColor("#f4a100"));
                 sy_xh.setTextColor(Color.parseColor("#262626"));
                 sy_xb.setTextColor(Color.parseColor("#262626"));
@@ -264,6 +274,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
                 commodity = "洗护";
                 Commodity(commodity);
                 sy_zh.setTextColor(Color.parseColor("#262626"));
+                sy_dq.setTextColor(Color.parseColor("#262626"));
                 sy_sj.setTextColor(Color.parseColor("#262626"));
                 sy_xh.setTextColor(Color.parseColor("#f4a100"));
                 sy_xb.setTextColor(Color.parseColor("#262626"));
@@ -284,6 +295,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
                 commodity = "食品";
                 Commodity(commodity);
                 sy_zh.setTextColor(Color.parseColor("#262626"));
+                sy_dq.setTextColor(Color.parseColor("#262626"));
                 sy_sj.setTextColor(Color.parseColor("#262626"));
                 sy_xh.setTextColor(Color.parseColor("#262626"));
                 sy_xb.setTextColor(Color.parseColor("#262626"));
@@ -294,6 +306,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
                 commodity = "家用";
                 Commodity(commodity);
                 sy_zh.setTextColor(Color.parseColor("#262626"));
+                sy_dq.setTextColor(Color.parseColor("#262626"));
                 sy_sj.setTextColor(Color.parseColor("#262626"));
                 sy_xh.setTextColor(Color.parseColor("#262626"));
                 sy_xb.setTextColor(Color.parseColor("#262626"));
@@ -426,7 +439,23 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
          */
 
 
-
-
     }
+
+    /**处理两次点击手机返回键退出*/
+    long backtime = 0;
+    @Override
+    public void onBackPressed() {
+        long clicktime = System.currentTimeMillis();
+        if (backtime == 0 || clicktime - backtime > 1500) {
+            backtime = clicktime;
+            ToastUtil.show(this, "再次点击退出程序");
+        } else {
+            Intent backHome = new Intent(Intent.ACTION_MAIN);
+            backHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            backHome.addCategory(Intent.CATEGORY_HOME);
+            startActivity(backHome);
+        }
+    }
+
+
 }

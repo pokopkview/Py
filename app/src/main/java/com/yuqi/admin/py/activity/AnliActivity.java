@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.yuqi.admin.py.BaseActivity;
 import com.yuqi.admin.py.R;
+import com.yuqi.admin.py.utils.ToastUtil;
 
 /**
  * Created by Administrator on 2017/11/23.
@@ -57,26 +58,38 @@ public class AnliActivity extends BaseActivity implements View.OnClickListener{
             case R.id.bt_shouye:
                 intent  = new Intent(AnliActivity.this,ShouyActivity.class);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.bt_yuqi:
                 intent = new Intent(AnliActivity.this,YuqActivity.class);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.bt_anli:
 //                intent = new Intent(AnliActivity.this,YuqActivity.class);
 //                startActivity(intent);
-//                finish();
                 break;
 
             case R.id.bt_women:
                 intent = new Intent(AnliActivity.this,WomActivity.class);
                 startActivity(intent);
-                finish();
                 break;
+        }
+    }
+
+    /**处理两次点击手机返回键退出*/
+    long backtime = 0;
+    @Override
+    public void onBackPressed() {
+        long clicktime = System.currentTimeMillis();
+        if (backtime == 0 || clicktime - backtime > 1500) {
+            backtime = clicktime;
+            ToastUtil.show(this, "再次点击退出程序");
+        } else {
+            Intent backHome = new Intent(Intent.ACTION_MAIN);
+            backHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            backHome.addCategory(Intent.CATEGORY_HOME);
+            startActivity(backHome);
         }
     }
 }

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import com.yuqi.admin.py.BaseActivity;
-import com.yuqi.admin.py.MainActivity;
 import com.yuqi.admin.py.R;
 import java.util.ArrayList;
 

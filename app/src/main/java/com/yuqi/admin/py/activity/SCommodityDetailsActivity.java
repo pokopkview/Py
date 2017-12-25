@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ import java.util.List;
  * 商品详情
  */
 public class SCommodityDetailsActivity extends BaseActivity{
-    private TextView spxq_yuexiao,spxq_kuaidi,spxq_jiage,spxq_miaoshu;
+    private TextView spxq_yuexiao,spxq_kuaidi,spxq_jiage,spxq_miaoshu,submit;
     private EditText spxq_shuliang;
     Intent intent;
     /**轮播图片*/
@@ -92,6 +93,9 @@ public class SCommodityDetailsActivity extends BaseActivity{
         spxq_yuexiao = (TextView)findViewById(R.id.spxq_yuexiao);
         spxq_shuliang = (EditText)findViewById(R.id.spxq_shuliang);
 
+        submit= (TextView)findViewById(R.id.submit);
+        submit.setVisibility(View.VISIBLE);
+        submit.setText("购物车");
 
     }
 
@@ -103,18 +107,16 @@ public class SCommodityDetailsActivity extends BaseActivity{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.Jrgwc:
-                //商品详情
+            case R.id.Jrgwc://商品详情
                 int user_id = CommonData.user_id;
                 int commodity_id = queryCommodityBean.getObject().getCommodity().getId();
                 addShoppingtrolleyHttp(user_id,commodity_id,1);
                 break;
-            case R.id.Ljgm:
+            case R.id.Ljgm://立即购买
                 int commodity_id1 = queryCommodityBean.getObject().getCommodity().getId();
                 String orderNumber = spxq_shuliang.getText().toString();//购买数量
-
                 dingDan = new ArrayList<DingDanBean.DingdanBean>();
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i <1; i++) {
                     DingDanBean.DingdanBean info = new DingDanBean.DingdanBean();
                     info.setCommodity_id(commodity_id1);
                     info.setOrderNumber(Integer.parseInt(orderNumber));
@@ -125,11 +127,29 @@ public class SCommodityDetailsActivity extends BaseActivity{
                     info.setCommodityName(queryCommodityBean.getObject().getCommodity().getCommodityName());
                     dingDan.add(info);
                 }
-
                 intent = new Intent(SCommodityDetailsActivity.this,SConfirmationSingleActivity.class);
                 intent.putExtra("dingDan", (Serializable) dingDan);
                 startActivity(intent);
-                finish();
+                break;
+
+            case R.id.submit:
+                intent = new Intent(SCommodityDetailsActivity.this,SShoppingCartActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.spxq_jian:
+                int jian = Integer.parseInt(spxq_shuliang.getText().toString());
+                if (jian > 1 ){
+                     jian = Integer.parseInt(spxq_shuliang.getText().toString()) - 1;
+                    spxq_shuliang.setText(jian+"");
+                }else if (spxq_shuliang.getText().toString().length()==0){
+                    spxq_shuliang.setText(1+"");
+                }
+                break;
+            case R.id.spxq_jia:
+                int jia = Integer.parseInt(spxq_shuliang.getText().toString()) + 1;
+                if (jia == 9999)return;
+                spxq_shuliang.setText(jia+"");
                 break;
 
         }
@@ -202,9 +222,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
             BitmapUtils bitmapUtils = new BitmapUtils(mContext);
             bitmapUtils.display(imageView,bean1.getPicture());
             container.addView(imageView);
-
         }
-
     }
 
 
@@ -289,7 +307,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
         for(int i = 0; i <  queryCommodityBean.getObject().getCommoditypictures().size(); i ++) {
             APPqueryCommodityBean.ObjectBean.CommoditypicturesBean info = new APPqueryCommodityBean.ObjectBean.CommoditypicturesBean();
             info.setPicture(queryCommodityBean.getObject().getCommoditypictures().get(i).getPicture());
-            switch (i) {
+//            switch (i) {
 //                case 0:
 //                    info.setPicture_url("http://www.yuqibest.com/yuqibest/index.php");
 //                    break;
@@ -299,7 +317,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
 //                case 2:
 //                    info.setPicture_url("http://www.yuqibest.com/yuqibest/index.php/Home/Index/blueprint/sort/3.html");
 //                    break;
-            }
+//            }
             infos.add(info);
         }
 

@@ -40,6 +40,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
+            android:textStyle="bold"
             android:onClick="onLayoutClick"
             android:text="提交"
             android:visibility="invisible" />

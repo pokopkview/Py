@@ -1,6 +1,7 @@
 package com.yuqi.admin.py;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.yuqi.admin.py.utils.ClickUtils;
 import com.yuqi.admin.py.utils.StringUtil;
+import com.yuqi.admin.py.utils.ToastUtil;
 
 /**
  * Created by Administrator on 2017/11/23.
@@ -43,5 +45,6 @@ import com.yuqi.admin.py.utils.StringUtil;
             title.setText(title_text());
         }
     }
+
 
 }

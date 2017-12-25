@@ -52,7 +52,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_margin"
+                                android:layout_marginTop="@dimen/_high_small3"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -66,12 +66,14 @@
                                         android:text="收货人:"
                                         android:textStyle="bold"/>
                                     <TextView
+                                        android:id="@+id/qrxd_shoujianren"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginLeft="@dimen/_high_small"
                                         android:text="李某某"/>
                                     <TextView
+                                        android:id="@+id/qrxd_shoujihao"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="@dimen/_high_small"
@@ -89,6 +91,7 @@
                                         android:text="隶属公司:"
                                         android:textStyle="bold"/>
                                     <TextView
+                                        android:id="@+id/qrxd_lishugongsi"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -100,7 +103,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_high_small3"
-                                    android:layout_marginBottom="@dimen/_margin"
+                                    android:layout_marginBottom="@dimen/_high_small3"
                                     android:orientation="horizontal">
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -109,6 +112,7 @@
                                         android:text="收货地址:"
                                         android:textStyle="bold"/>
                                     <TextView
+                                        android:id="@+id/qrxd_shouhuodizhi"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -174,6 +178,7 @@
             android:textStyle="bold"
             android:text="买家留言"/>
         <EditText
+            android:id="@+id/maijialiuyan1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_high_small"

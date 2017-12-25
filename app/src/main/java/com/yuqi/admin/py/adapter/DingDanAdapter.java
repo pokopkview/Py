@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/12/21.
+ * 订单详情
  */
 public class DingDanAdapter extends BaseAdapter {
     private Context context;
@@ -60,7 +61,7 @@ public class DingDanAdapter extends BaseAdapter {
 
         hold.qrddxx_miaoshu.setText(String.valueOf(data.get(position).getCommodityName()));
         hold.qrddxx_jine.setText("￥"+String.valueOf(data.get(position).getCommodityPrice()));
-        hold.qrddxx_shuliang.setText(""+String.valueOf(data.get(position).getOrderNumber()));
+        hold.qrddxx_shuliang.setText("x"+String.valueOf(data.get(position).getOrderNumber()));
 
         BitmapUtils bitmapUtils = new BitmapUtils(context);
         // 加载网络图片

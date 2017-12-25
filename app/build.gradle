@@ -58,4 +58,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+//    //添加支付库
+//    compile 'io.github.mayubao:pay_library:1.0.0'
+//    compile files('libs/alipaySdk-20170922.jar')
 }

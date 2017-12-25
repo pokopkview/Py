@@ -199,7 +199,7 @@
                             <ImageView
                                 android:layout_width="@dimen/simple_btn_height"
                                 android:layout_height="@dimen/simple_btn_height"
-                                android:background="@mipmap/sy_fl"
+                                android:background="@mipmap/sy_gdfl"
                                 android:gravity="center" />
 
                             <TextView
@@ -342,6 +342,17 @@
                             android:clickable="true"
                             android:text="综合"
                             android:textColor="@color/yellow1"
+                            android:gravity="center"   />
+
+                        <TextView
+                            android:id="@+id/sy_dq1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:clickable="true"
+                            android:text="电器"
                             android:gravity="center"   />
 
                         <TextView

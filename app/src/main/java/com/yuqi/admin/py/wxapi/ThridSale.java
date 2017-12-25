@@ -1,4 +1,4 @@
-package com.yuqi.admin.py;
+package com.yuqi.admin.py.wxapi;
 
 /**
  * Created by zhanghongwei on 2017/12/22.

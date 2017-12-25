@@ -187,31 +187,36 @@
                             android:textSize="@dimen/text_centre1"/>
 
                         <ImageView
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
+                            android:id="@+id/spxq_jian"
+                            android:layout_width="@dimen/simple_text_height"
+                            android:layout_height="@dimen/simple_text_height"
+                            android:gravity="center"
                             android:background="@drawable/text_background_gray"
                             android:padding="@dimen/_high_small"
-                            android:gravity="center"
+                            android:onClick="onLayoutClick"
+                            android:clickable="true"
                             android:src="@mipmap/jian"/>
                         <EditText
                             android:id="@+id/spxq_shuliang"
                             android:layout_width="0dp"
-                            android:layout_height="38dp"
+                            android:layout_height="@dimen/simple_text_height"
                             android:layout_weight="0.3"
                             android:background="@drawable/text_background_gray"
                             android:gravity="center"
-                            android:padding="10dp"
-                            android:maxLines="1"
+                            android:maxLength="4"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textSize="@dimen/text_centre1"
                             android:textStyle="bold"
                             android:text="1"/>
                         <ImageView
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
+                            android:id="@+id/spxq_jia"
+                            android:layout_width="@dimen/simple_text_height"
+                            android:layout_height="@dimen/simple_text_height"
+                            android:onClick="onLayoutClick"
+                            android:padding="@dimen/_high_small"
                             android:background="@drawable/text_background_gray"
-                            android:padding="10dp"
-                            android:layout_marginRight="@dimen/_high_small"
+                            android:clickable="true"
                             android:src="@mipmap/jia"/>
                     </LinearLayout>
 
@@ -233,6 +238,7 @@
                         android:orientation="vertical"
                         android:id="@+id/ll_showpictrue_container"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="@dimen/_high_small3"
                         android:layout_height="wrap_content">
 
                     </LinearLayout>

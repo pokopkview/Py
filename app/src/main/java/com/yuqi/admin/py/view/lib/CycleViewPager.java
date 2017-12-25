@@ -349,7 +349,8 @@ public class CycleViewPager extends Fragment implements ViewPager.OnPageChangeLi
 
 					@Override
 					public void onClick(View v) {
-						mImageCycleViewListener.onImageClick(infos.get(currentPosition - 1), currentPosition, v);
+						//   轮播图片点击事件处理
+//						mImageCycleViewListener.onImageClick(infos.get(currentPosition - 1), currentPosition, v);
 					}
 				});
 			}

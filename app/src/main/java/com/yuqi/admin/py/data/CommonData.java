@@ -18,7 +18,9 @@ public class CommonData {
 
 
     public final static String URL="http://139.224.238.234:8021/pyjh/";
+    public final static String alipayURL="http://139.224.238.234:8021/pyjh/api/alipay/";
 //    public final static String  URL="http://192.168.1.117:7755/pyjh/";
+//    public final static String  alipayURL="http://192.168.1.117:7755/pyjh/api/alipay/";
 
     public static String state;          //登录成功状态
 
@@ -40,6 +42,10 @@ public class CommonData {
     public static final int TUPIAN = 1;
     public static final int SHIPIAN = 2;
     public static final int LUYIN = 3;
+
+    public static final String REQUEST_PARAMETER= "请求参数" ;
+    public static final String REQUEST_SUCCESS= "请求成功" ;
+    public static final String REQUEST_EXCEOTON= "请求异常" ;
 
     public static final String LISTVIEW_FIRSTLOAD_NULL = "没有任何记录" ;
     public static final String LISTVIEW_LOADING = "加载中，请稍后" ;

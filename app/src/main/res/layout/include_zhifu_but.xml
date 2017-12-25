@@ -90,7 +90,7 @@
                 android:layout_width="@dimen/simple_btn_height"
                 android:layout_height="@dimen/simple_btn_height"
                 android:padding="@dimen/_high_small"
-                android:src="@mipmap/wx2"/>
+                android:src="@mipmap/wx1"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -103,12 +103,12 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/xuanzhong"/>
+                android:src="@mipmap/meixuanzhong"/>
             <ImageView
                 android:layout_height="18dp"
                 android:layout_width="18dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_margin"
+                android:padding="@dimen/_high_small"
                 android:src="@mipmap/xia"/>
         </LinearLayout>
     <View
@@ -131,7 +131,7 @@
                 android:layout_width="@dimen/simple_btn_height"
                 android:layout_height="@dimen/simple_btn_height"
                 android:padding="@dimen/_high_small"
-                android:src="@mipmap/zfb1"/>
+                android:src="@mipmap/zfb2"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/meixuanzhong"/>
+                android:src="@mipmap/xuanzhong"/>
             <ImageView
                 android:layout_height="18dp"
                 android:layout_width="18dp"
@@ -185,7 +185,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:padding="@dimen/_high_small3"
                 android:src="@mipmap/meixuanzhong"/>
             <ImageView
                 android:layout_height="18dp"
@@ -212,6 +211,7 @@
                 android:textSize="@dimen/_margin"
                 android:text="共"/>
             <TextView
+                android:id="@+id/jianshu2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -230,6 +230,7 @@
                 android:layout_marginLeft="@dimen/_margin"
                 android:text="合计："/>
             <TextView
+                android:id="@+id/heji2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_high_small"
