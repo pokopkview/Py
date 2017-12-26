@@ -19,6 +19,7 @@ public class CommonData {
 
     public final static String URL="http://139.224.238.234:8021/pyjh/";
     public final static String alipayURL="http://139.224.238.234:8021/pyjh/api/alipay/";
+
 //    public final static String  URL="http://192.168.1.117:7755/pyjh/";
 //    public final static String  alipayURL="http://192.168.1.117:7755/pyjh/api/alipay/";
 

@@ -351,7 +351,6 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
 //                                ToastUtil.show(ShouyActivity.this,"查询成功");
                                 break;
                             case "210":
-                                ToastUtil.show(ShouyActivity.this,"数据加载失败");
                                 break;
                         }
                         //采购需求

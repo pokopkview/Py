@@ -27,7 +27,6 @@
             android:visibility="gone"
             android:src="@mipmap/xx"/>
 
-
         <ImageView
             android:id="@+id/im1"
             android:layout_width="140dp"

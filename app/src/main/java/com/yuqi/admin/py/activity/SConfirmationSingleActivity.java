@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.AuthTask;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
@@ -41,6 +44,7 @@ import java.util.Map;
  *      确认下单
  */
 public class SConfirmationSingleActivity extends BaseActivity {
+    private static final int SDK_PAY_FLAG = 1;
     private ImageView dd_songhuo1,dd_ziqu1,dd_weixin1,dd_weixin2,
             dd_zhifubao1,dd_zhifubao2,dd_yue1,dd_yue2;
     private TextView qrxd_shouhuodizhi, qrxd_shoujianren,qrxd_shoujihao,qrxd_lishugongsi,jianshu2,heji2;
@@ -56,6 +60,7 @@ public class SConfirmationSingleActivity extends BaseActivity {
     List<DingDanBean.DingdanBean> commodity;
 
     String peisong ="支付宝";
+    String peisong1 ="送货上门";
     String zhifu ="";
 
     private int commodity_id;
@@ -69,7 +74,6 @@ public class SConfirmationSingleActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.s_spdd_querenxiadan);
-        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
 
         //获取详情传过来的值
         commodity = (List<DingDanBean.DingdanBean>) getIntent().getSerializableExtra("dingDan");
@@ -93,9 +97,18 @@ public class SConfirmationSingleActivity extends BaseActivity {
         dd_yue1 = (ImageView)findViewById(R.id.dd_yue1);
         dd_yue2 = (ImageView)findViewById(R.id.dd_yue11);
 
-        jianshu2 = (TextView)findViewById(R.id.jianshu2);
-        heji2 = (TextView)findViewById(R.id.heji2);
+        jianshu2 = (TextView)this.findViewById(R.id.jianshu2);
+        heji2 = (TextView)this.findViewById(R.id.heji2);
         maijialiuyan= (EditText)findViewById(R.id.maijialiuyan1);
+
+//        件数 和  金额合计  控件赋值
+        jianshu2.setText(commodity.get(0).getOrderNumber());
+        int a = Integer.parseInt(jianshu2.getText().toString());
+
+
+        double tradeMoney1=  ( a * (commodity.get(0).getCommodityPrice()));
+        heji2.setText("￥"+tradeMoney1);
+
     }
     //获取默认地址
     private void showDefaultShippingAddressHttp(int user_id) {
@@ -173,30 +186,30 @@ public class SConfirmationSingleActivity extends BaseActivity {
                 for (int i =0;i<commodity.size();i++){
                     commodity_id = commodity.get(i).getCommodity_id();//商品id
                     counts = commodity.get(i).getOrderNumber();//商品数量
-                    tradeMoney = commodity.get(i).getCommodityPrice()+"";//订单金额是变量
-                    tradeMoney = commodity.get(i).getCommodityPrice()+"";//订单金额是变量
+                    tradeMoney = String.valueOf(commodity.get(i).getCommodityPrice());//订单金额是变量
                 }
                 int address_id1 = address_id;
-                tradeMoney = (counts * Integer.parseInt(tradeMoney))+"";
-//                //件数 和  金额合计  控件赋值
-//                jianshu2.setText(counts);
-//                heji2.setText("￥"+tradeMoney);
+//                tradeMoney = (counts * Integer.parseInt(tradeMoney))+"";
+                tradeMoney = 1+"";
                 //立即支付
                 int user_id = CommonData.user_id;//用户id
                 int address_id = address_id1 ;//地址ID
                 String payWay = peisong;//支付方式
                 String payAccount = CommonData.accounts;//支付账号
+                String buyWay = peisong;//配送方式
 
                 if (maijialiuyan.getText().toString().length()==0){
                     messages= "无";
                 }else {
                     messages = maijialiuyan.getText().toString();
                 }
-                addShoppingtrolleyHttp(user_id, commodity_id,counts,address_id,payWay,payAccount,tradeMoney,messages);
+                addShoppingtrolleyHttp(user_id, commodity_id,counts,address_id,payWay,buyWay,messages);
+
+//                addShoppingtrolleyHttp(14, 4,2,2,"支付宝支付","送货上门","无");
 
                 Log.e("111111111","用户id="+user_id+",地址ID="+address_id+
                         ",支付方式="+payWay+",支付账号="+payAccount+",商品id="+commodity_id+",商品数量="+counts
-                        +",总额="+tradeMoney+",卖家留言="+messages);
+                        +"卖家留言="+messages  +"配送方式="+buyWay);
 
                 break;
             case R.id.sjxx://收件地址
@@ -207,12 +220,12 @@ public class SConfirmationSingleActivity extends BaseActivity {
             case R.id.dd_songhuo:
                 dd_songhuo1.setImageResource(R.mipmap.xuanzhong);
                 dd_ziqu1.setImageResource(R.mipmap.meixuanzhong);
-                peisong ="送货";
+                peisong1 ="送货";
                 break;
             case R.id.dd_ziqu:
                 dd_songhuo1.setImageResource(R.mipmap.meixuanzhong);
                 dd_ziqu1.setImageResource(R.mipmap.xuanzhong);
-                peisong ="自取";
+                peisong1 ="自取";
                 break;
             case R.id.dd_weixin:
                 dd_weixin1.setImageResource(R.mipmap.wx2);
@@ -246,21 +259,24 @@ public class SConfirmationSingleActivity extends BaseActivity {
         }
     }
 
-    private void addShoppingtrolleyHttp(final int user_id, final int commodity_id, final int counts, final int address_id, final String payWay, final String payAccount, final String tradeMoney, final String messages) {
+    private void addShoppingtrolleyHttp(final int user_id, final int commodity_id,
+                                        final int counts, final int address_id,
+                                        final String payWay, final String buyWay,
+                                        final String messages) {
 
         RequestParams params = new RequestParams();
+
         params.addQueryStringParameter("user_id", user_id+"");
         params.addQueryStringParameter("commodity_id", commodity_id+"");
         params.addQueryStringParameter("counts", counts+"");
         params.addQueryStringParameter("address_id", address_id+"");
         params.addQueryStringParameter("payWay", payWay);
-        params.addQueryStringParameter("payAccount", payAccount);
-        params.addQueryStringParameter("tradeMoney", tradeMoney );
+        params.addQueryStringParameter("BuyWay", buyWay);
         params.addQueryStringParameter("messages", messages);
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000*10);
-        Log.e("请求数据=", "请求数据="+params);
-        http.send(HttpRequest.HttpMethod.GET,
+         Log.e("请求数据=", "请求数据="+params);
+        http.send(HttpRequest.HttpMethod.POST,
                 CommonData.alipayURL+"createOrder.action",
                 params,
                 new RequestCallBack<String>() {
@@ -283,13 +299,14 @@ public class SConfirmationSingleActivity extends BaseActivity {
 //                        intent.setClass(SConfirmationSingleActivity.this,SSettlementActivity.class);
 //                        startActivity(intent);
 //                        finish();
-
-                        Gson gson = new Gson();//初始化
-                        alipayBean = gson.fromJson(result, AlipayBean.class);//result为请求后返回的JSON数据,可以直接使用XUtils获得,NewsData.class为一个bean.如以下数据：
-                        String credential  = alipayBean.getResult();
-                        Log.e("orderInfo=", credential);
-                        alipay(credential);
-
+                        //支付宝支付
+                        if (!TextUtils.isEmpty(result)){
+                            Gson gson = new Gson();//初始化
+                            alipayBean = gson.fromJson(result, AlipayBean.class);//result为请求后返回的JSON数据,可以直接使用XUtils获得,NewsData.class为一个bean.如以下数据：
+                            String credential  = alipayBean.getResult();
+                            Log.e("orderInfo=", credential);
+                            alipay(credential);
+                        }
                     }
                     @Override
                     public void onFailure(HttpException error, String msg) {
@@ -303,68 +320,45 @@ public class SConfirmationSingleActivity extends BaseActivity {
 
 
     private void alipay(final String orderInfo) {
-        Runnable payRunnable = new Runnable() {
+        Runnable payRunnable  = new Runnable() {
             @Override
             public void run() {
                 PayTask alipay = new PayTask(SConfirmationSingleActivity.this);
-                //传入支付订单信息,设置ture表示显示支付的loading
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                Log.e("调起支付界面=", result.toString() + "/");
+
                 Message msg = new Message();
-                Log.e("支付宝返回结果=",msg + "/");
-                msg.what = 1;
+                msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
-                handler.sendMessage(msg);
+                mHandler.sendMessage(msg);
+
             }
         };
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
+        // 必须异步调用
+        Thread payThread  = new Thread(payRunnable );
+        payThread .start();
     }
 
 
-    private Handler handler = new Handler() {
+    private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 1: {
-                    //PayResult非常简单的工具类,把map里的结果取出来(来自支付宝demo)
+                case SDK_PAY_FLAG: {
+                    @SuppressWarnings("unchecked")
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-
-                    //对于支付结果，请商户依赖服务端的异步通知结果
-                    //同步通知结果，仅作为支付结束的通知
+                    /**
+                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
                     String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-                    String resultStatus = payResult.getResultStatus();//状态码
-                    String memo = payResult.getMemo();//附加信息,如果不为空可以提示该内容
-                    switch (resultStatus) {
-                        case "9000":
-                            //支付成功
-                            break;
-                        case "8000":
-                            //支付结果确认中
-                            break;
-                        case "4000":
-                            //订单支付失败
-                            break;
-                        case "5000":
-                            //重复请求
-                            break;
-                        case "6001":
-                            //用户中途取消
-                            break;
-                        case "6002":
-                            //网络连接出错
-                            break;
-                        case "6004":
-                            //支付结果未知,请查询订单
-                            break;
-                        default:
-                            //其它支付错误
-                            break;
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        Toast.makeText(SConfirmationSingleActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Toast.makeText(SConfirmationSingleActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
-                    Log.e("TAG", "handleMessage: " + payResult.toString());
-                    break;
                 }
-                default:
-                    break;
             }
         }
     };

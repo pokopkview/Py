@@ -34,7 +34,7 @@ public class DingDanBean implements Serializable {
         private String Picture;
         private int Sales;
         private String Express;
-        private int CommodityPrice;
+        private double CommodityPrice;
         private String CommodityName;
 
         public int getCommodity_id() {
@@ -77,11 +77,11 @@ public class DingDanBean implements Serializable {
             Express = express;
         }
 
-        public int getCommodityPrice() {
+        public Double getCommodityPrice() {
             return CommodityPrice;
         }
 
-        public void setCommodityPrice(int commodityPrice) {
+        public void setCommodityPrice(double commodityPrice) {
             CommodityPrice = commodityPrice;
         }
 

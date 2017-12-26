@@ -63,7 +63,8 @@ public class SCommodityDetailsActivity extends BaseActivity{
 
     private QueryCommodityAdapter qcAdapter;
 //    private ListView qcLv;
-    String Picture;
+    String Picture;//图片
+    Double CommodityPrice;//金额
 
     APPqueryCommodityBean queryCommodityBean;
     private List<DingDanBean.DingdanBean> dingDan;
@@ -76,6 +77,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
         Bundle bundle = intent1.getExtras();
         String Commodity_id1 = bundle.getString("Commodity_id");
         Picture = bundle.getString("Picture");
+
         int Commodity_id = Integer.parseInt(Commodity_id1);
         //商品详情
         APPqueryCommodityHttp(Commodity_id,Picture);
@@ -123,7 +125,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
                     info.setPicture(Picture);
                     info.setSales(queryCommodityBean.getObject().getCommodity().getSales());
                     info.setExpress(queryCommodityBean.getObject().getCommodity().getExpress()+"");
-                    info.setCommodityPrice((int)queryCommodityBean.getObject().getCommodity().getCommodityPrice());
+                    info.setCommodityPrice(queryCommodityBean.getObject().getCommodity().getCommodityPrice());
                     info.setCommodityName(queryCommodityBean.getObject().getCommodity().getCommodityName());
                     dingDan.add(info);
                 }
