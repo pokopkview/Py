@@ -5,9 +5,9 @@
     android:background="@color/white1"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_marginTop="@dimen/_margin"
         android:layout_marginBottom="@dimen/_margin"
         android:layout_marginLeft="@dimen/_margin"
@@ -15,12 +15,15 @@
 
         <ImageView
             android:id="@+id/iv_11"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@mipmap/xuanzhong"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true" />
 
         <ImageView
+            android:layout_toRightOf="@+id/iv_11"
             android:id="@+id/iv_22"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -35,19 +38,20 @@
             android:background="@drawable/text_background_gray"
             android:padding="@dimen/_high_small"
             android:gravity="center"
+            android:layout_toLeftOf="@+id/et_44"
             android:src="@mipmap/jian"/>
         <EditText
             android:id="@+id/et_44"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_weight="0.3"
-            android:background="@drawable/text_background_gray"
             android:gravity="center"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/text_background_gray"
             android:padding="10dp"
             android:maxLines="1"
             android:singleLine="true"
             android:textSize="@dimen/text_centre1"
             android:textStyle="bold"
+            android:layout_toLeftOf="@+id/iv_55"
             android:text="1"/>
         <ImageView
             android:id="@+id/iv_55"
@@ -56,7 +60,22 @@
             android:background="@drawable/text_background_gray"
             android:padding="10dp"
             android:layout_marginRight="@dimen/_high_small"
+            android:layout_toLeftOf="@+id/tv_delete"
             android:src="@mipmap/jia"/>
+
+        <TextView
+            android:layout_toLeftOf="@+id/tv_singleprice"
+            android:layout_alignParentBottom="true"
+            android:text="单价："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:layout_toLeftOf="@+id/tv_delete"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_singleprice"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_delete"
@@ -65,9 +84,10 @@
             android:background="@color/red1"
             android:paddingLeft="@dimen/_margin"
             android:paddingRight="@dimen/_margin"
-            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
             android:gravity="center"
-            android:text="删除"/>
-    </LinearLayout>
+            android:text="删除"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 
 </LinearLayout>

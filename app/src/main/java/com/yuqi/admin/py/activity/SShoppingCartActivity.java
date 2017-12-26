@@ -1,5 +1,6 @@
 package com.yuqi.admin.py.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
 import com.yuqi.admin.py.data.CommonData;
 import com.yuqi.admin.py.utils.DialogUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
+import com.yuqi.admin.py.view.ShoppCarViewBItem;
 import com.yuqi.admin.py.wxapi.ThridSale;
 import com.yuqi.admin.py.adapter.ShangPinAdapter;
 import com.yuqi.admin.py.bean.ShoppingCarBean;
@@ -38,16 +40,17 @@ public class SShoppingCartActivity extends BaseActivity{
     private TextView Jrgwc;
     private LinearLayout container,none;
 
-    getShoppingtrolleyBean CarBeanData;
+    private getShoppingtrolleyBean CarBeanData;
     private LinearLayout mGallery;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.s_gwc_gouwuche);
+        mContext = this;
         init();
-
         getShoppingtrolleyHTTP();
     }
 
@@ -84,6 +87,12 @@ public class SShoppingCartActivity extends BaseActivity{
                         switch (state) {
                             case "200":
 //                                addView(CarBeanData);
+//                                ShoppCarViewBItem bItem = new ShoppCarViewBItem(mContext);
+                                initView();
+//                                container.addView();
+
+
+
                                 break;
                             case "210":
                                 none.setVisibility(View.VISIBLE);
@@ -103,12 +112,17 @@ public class SShoppingCartActivity extends BaseActivity{
     private void init() {
         gwc_gv = (MultiGridView)findViewById(R.id.gwc_gv);
         none = (LinearLayout) findViewById(R.id.ll_none);
-        container = (LinearLayout) findViewById(R.id.shop_container);
-        initView();
+        container = (LinearLayout) findViewById(R.id.layout_container);
+
     }
 
 
     private void initView() {
+        if(CarBeanData != null) {
+            ShoppCarViewBItem item = new ShoppCarViewBItem(mContext, CarBeanData);
+            container.addView(item);
+        }
+
 //        ObserverManager manager = ObserverManager.getInstance();
 //        /**
 //         * 如果没有购物车的数据就显示无数据的页面

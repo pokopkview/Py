@@ -12,14 +12,14 @@ public class getShoppingtrolleyBean {
      * state : 200
      */
 
-    private ObjectBean object;
+    private ObjectEntity object;
     private String state;
 
-    public ObjectBean getObject() {
+    public ObjectEntity getObject() {
         return object;
     }
 
-    public void setObject(ObjectBean object) {
+    public void setObject(ObjectEntity object) {
         this.object = object;
     }
 
@@ -31,18 +31,18 @@ public class getShoppingtrolleyBean {
         this.state = state;
     }
 
-    public static class ObjectBean {
-        private List<手机Bean> 手机;
+    public static class ObjectEntity {
+        private List<手机Entity> 手机;
 
-        public List<手机Bean> get手机() {
+        public List<手机Entity> get手机() {
             return 手机;
         }
 
-        public void set手机(List<手机Bean> 手机) {
+        public void set手机(List<手机Entity> 手机) {
             this.手机 = 手机;
         }
 
-        public static class 手机Bean {
+        public static class 手机Entity {
             /**
              * id : 6
              * commodity_id : 4

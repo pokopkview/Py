@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/ll_containner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -21,7 +22,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="@color/white1"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
