@@ -14,6 +14,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
         <com.yuqi.admin.py.view.ResizableImageView
+            android:id="@+id/ljdh_tupian"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_margin" > 
         <TextView
-            android:id="@+id/jfdh_miaoshu"
+            android:id="@+id/ljdh_leixing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_large"
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_below="@+id/jfdh_miaoshu"
+            android:layout_below="@+id/ljdh_leixing"
             android:layout_marginTop="@dimen/_margin"
             android:orientation="horizontal">
             <ImageView
@@ -45,6 +46,7 @@
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/ljd_jifen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow1"
@@ -74,13 +76,17 @@
             android:textColor="@color/gray2"
             android:textSize="@dimen/text_centre1"/>
         <ImageView
+            android:id="@+id/ljdh_jian"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:background="@drawable/text_background_gray"
             android:padding="@dimen/_high_small"
+            android:onClick="onLayoutClick"
+            android:clickable="true"
             android:gravity="center"
             android:src="@mipmap/jian"/>
         <EditText
+            android:id="@+id/ljdh_shulian"
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="0.3"
@@ -88,13 +94,17 @@
             android:gravity="center"
             android:padding="10dp"
             android:maxLines="1"
+            android:maxLength="4"
             android:singleLine="true"
             android:textSize="@dimen/text_centre1"
             android:textStyle="bold"
             android:text="1"/>
         <ImageView
+            android:id="@+id/ljdh_jia"
             android:layout_width="38dp"
             android:layout_height="38dp"
+            android:onClick="onLayoutClick"
+            android:clickable="true"
             android:background="@drawable/text_background_gray"
             android:padding="10dp"
             android:layout_marginRight="@dimen/_high_small"

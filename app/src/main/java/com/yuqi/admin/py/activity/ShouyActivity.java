@@ -104,7 +104,7 @@ public class ShouyActivity extends BaseActivity implements View.OnClickListener,
         sy_sp = (TextView)findViewById(R.id.sy_sp1);
         sy_jy = (TextView)findViewById(R.id.sy_jy1);
 
-        title.setText("彭友聚汇—> 采购行家");
+        title.setText("彭友聚汇");
         back.setVisibility(View.INVISIBLE);
         bt_shouye.setImageResource(R.mipmap.b4);
     }

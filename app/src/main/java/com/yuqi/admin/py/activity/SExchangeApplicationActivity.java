@@ -2,6 +2,7 @@ package com.yuqi.admin.py.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -53,9 +54,19 @@ public class SExchangeApplicationActivity extends BaseActivity{
 
                     @Override
                     public void onClick(View arg0) {
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:13621801679"));
+                        startActivity(intent);
                     }
                 });
 
+                break;
+
+            case R.id.ljlxpysy:
+                Intent intent = new Intent(SExchangeApplicationActivity.this,ShouyActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

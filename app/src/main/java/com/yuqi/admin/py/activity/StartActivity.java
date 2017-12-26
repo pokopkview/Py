@@ -1,16 +1,27 @@
 package com.yuqi.admin.py.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.yuqi.admin.py.BaseActivity;
 import com.yuqi.admin.py.R;
+import com.yuqi.admin.py.utils.PermissionUtils;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/11/23.
@@ -18,6 +29,16 @@ import java.util.ArrayList;
 public class StartActivity extends BaseActivity {
     private ViewPager viewPager;
     private ArrayList<View> pageview;
+
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_CAMERA = 2;
+    String[] permissions = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CALL_PHONE
+    };
+    // 声明一个集合，在后面的代码中用来存储用户拒绝授权的权
+    List<String> mPermissionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +94,21 @@ public class StartActivity extends BaseActivity {
 
         //绑定适配器
         viewPager.setAdapter(mPagerAdapter);
+
+        mPermissionList.clear();
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(StartActivity.this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permissions[i]);
+            }
+        }
+        if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
+            Toast.makeText(StartActivity.this,"已经授权",Toast.LENGTH_LONG).show();
+        } else {//请求权限方法
+            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
+            ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
+            ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
+        }
     }
 
     @Override
@@ -89,4 +125,37 @@ public class StartActivity extends BaseActivity {
                 break;
         }
     }
+
+
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showToast("权限已申请");
+            } else {
+                showToast("权限已拒绝");
+            }
+        }else if (requestCode == MY_PERMISSIONS_REQUEST_CALL_CAMERA){
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    //判断是否勾选禁止后不再询问
+                    boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(StartActivity.this, permissions[i]);
+                    if (showRequestPermission) {
+                        showToast("权限未申请");
+                    }
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void showToast(String string){
+        Toast.makeText(StartActivity.this,string,Toast.LENGTH_LONG).show();
+    }
+
 }

@@ -101,13 +101,11 @@ public class SConfirmationSingleActivity extends BaseActivity {
         heji2 = (TextView)this.findViewById(R.id.heji2);
         maijialiuyan= (EditText)findViewById(R.id.maijialiuyan1);
 
-//        件数 和  金额合计  控件赋值
-        jianshu2.setText(commodity.get(0).getOrderNumber());
-        int a = Integer.parseInt(jianshu2.getText().toString());
-
-
-        double tradeMoney1=  ( a * (commodity.get(0).getCommodityPrice()));
-        heji2.setText("￥"+tradeMoney1);
+////        件数 和  金额合计  控件赋值
+//        jianshu2.setText(commodity.get(0).getOrderNumber());
+//        int a = Integer.parseInt(jianshu2.getText().toString());
+//        double tradeMoney1=  ( a * (commodity.get(0).getCommodityPrice()));
+//        heji2.setText("￥"+tradeMoney1);
 
     }
     //获取默认地址

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="90dp"
+    android:layout_height="120dp"
     android:background="@drawable/text_background_gray"
     android:layout_margin="@dimen/_margin"
     android:gravity="center"
@@ -13,6 +13,7 @@
         android:layout_marginLeft="@dimen/simple_text_height"
         android:layout_marginRight="@dimen/simple_text_height"
         android:textStyle="bold"
+        android:layout_marginTop="@dimen/_high"
         android:text="13621801679"/>
         <View
             android:layout_width="match_parent"
@@ -37,6 +38,7 @@
             android:gravity="center"
             android:onClick="onLayoutClick"
             android:clickable="true"
+            android:visibility="gone"
             android:text="复制"/>
 
         <TextView
