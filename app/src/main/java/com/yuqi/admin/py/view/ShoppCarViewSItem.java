@@ -74,7 +74,7 @@ public class ShoppCarViewSItem extends LinearLayout {
     }
 
     public void setVisi(boolean hiden){
-
+        //这里你就协商你需要隐藏或是展现的的控件啊
     }
 
     private void initView(){

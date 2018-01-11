@@ -110,6 +110,7 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
          * 自己写好接口
          */
         shop_container.removeView(viewSItem);
+        viewSItems.remove(viewSItem);
 
     }
 }
