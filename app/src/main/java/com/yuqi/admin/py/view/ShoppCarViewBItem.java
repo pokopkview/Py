@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.yuqi.admin.py.R;
 import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
 import com.yuqi.admin.py.interfaces.Deletesth;
+import com.yuqi.admin.py.interfaces.IselectInter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +22,33 @@ import java.util.List;
  */
 
 public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
-    private List<ShoppCarViewSItem> viewSItems = new ArrayList<>();
+    public List<ShoppCarViewSItem> viewSItems = new ArrayList<>();
     private ImageView iv_select;
     private TextView tv_type,tv_success;
     private LinearLayout shop_container ,iv_leixing;
     private getShoppingtrolleyBean bean;
     private Context mContext;
 
+    private IselectInter iselectInter;
     private ShoppCarViewBItem shoppCarViewBItem;
 
     private boolean isSuccess = false;
     private String SUCCESS = "完成";
     private String EDIT = "编辑";
 
-    public ShoppCarViewBItem(Context context,getShoppingtrolleyBean bean) {
-        this(context,null,bean);
+    public ShoppCarViewBItem(Context context, getShoppingtrolleyBean bean, IselectInter iselectInter) {
+        this(context,null,bean,iselectInter);
     }
 
-    public ShoppCarViewBItem(Context context, AttributeSet attrs,getShoppingtrolleyBean bean) {
-        this(context, attrs,0,bean);
+    public ShoppCarViewBItem(Context context, AttributeSet attrs,getShoppingtrolleyBean bean, IselectInter iselectInter) {
+        this(context, attrs,0,bean,iselectInter);
     }
 
-    public ShoppCarViewBItem(Context context, AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean bean) {
+    public ShoppCarViewBItem(Context context, AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean bean, IselectInter iselectInter) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         LayoutInflater.from(context).inflate(R.layout.item_gwc_bianji,this);
+        this.iselectInter = iselectInter;
         shoppCarViewBItem = this;
         this.bean = bean;
         initView();

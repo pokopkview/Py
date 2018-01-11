@@ -23,17 +23,21 @@ import com.yuqi.admin.py.bean.ShoppingCarBean;
 import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
 import com.yuqi.admin.py.data.CommonData;
 import com.yuqi.admin.py.interfaces.Deletesth;
+import com.yuqi.admin.py.interfaces.IselectInter;
 import com.yuqi.admin.py.utils.DialogUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
 import com.yuqi.admin.py.view.ShoppCarViewBItem;
 import com.yuqi.admin.py.adapter.ShangPinAdapter;
 import com.yuqi.admin.py.view.ShoppCarViewSItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/12/15.
  *  购物车
  */
-public class SShoppingCartActivity extends BaseActivity{
+public class SShoppingCartActivity extends BaseActivity implements IselectInter{
     private ShangPinAdapter spAdapter;
     private TextView Jrgwc;
     private LinearLayout container,none;
@@ -43,6 +47,9 @@ public class SShoppingCartActivity extends BaseActivity{
     private LayoutInflater mInflater;
     private Context mContext;
 
+
+    private List<getShoppingtrolleyBean.ObjectBean.手机Bean> beanList = new ArrayList<>();
+    private ShoppCarViewBItem mItem;
     private Deletesth deletesth;
 
     @Override
@@ -110,8 +117,8 @@ public class SShoppingCartActivity extends BaseActivity{
 
     private void initView() {
         if(CarBeanData != null) {
-            ShoppCarViewBItem item = new ShoppCarViewBItem(mContext, CarBeanData);
-            container.addView(item);
+            mItem = new ShoppCarViewBItem(mContext, CarBeanData,this);
+            container.addView(mItem);
         }
 
 //        ObserverManager manager = ObserverManager.getInstance();
@@ -152,4 +159,35 @@ public class SShoppingCartActivity extends BaseActivity{
     }
 
 
+    @Override
+    public void push(boolean select, ShoppCarViewSItem item) {
+        if(select){
+            beanList.add(item.data);
+        }else{
+            beanList.remove(item.data);
+        }
+        changeViews();
+    }
+
+
+    private void changeViews(){
+        /**
+         * 计算beanList里面的date数据来进行相加或是相减
+         * 这里要写计算方法，还有界面的改变
+         *
+         * 如果是全选，就直接把
+         */
+    }
+
+    private void allPick(boolean pick){
+        if(pick){
+            beanList.clear();
+            for(ShoppCarViewSItem item : mItem.viewSItems){
+                beanList.add(item.data);
+            }
+        }else{
+            beanList.clear();
+        }
+        changeViews();
+    }
 }

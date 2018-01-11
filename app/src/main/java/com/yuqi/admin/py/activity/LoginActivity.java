@@ -39,6 +39,9 @@ public class LoginActivity extends BaseActivity {
         init();
     }
 
+    /**
+     * 
+     */
     private void init() {
         ll_shoujihao = (EditText)findViewById(R.id.ll_shoujihao);
         ll_mima = (EditText)findViewById(R.id.ll_mima);

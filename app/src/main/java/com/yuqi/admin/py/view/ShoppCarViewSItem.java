@@ -29,6 +29,7 @@ import com.yuqi.admin.py.bean.DingDanBean;
 import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
 import com.yuqi.admin.py.data.CommonData;
 import com.yuqi.admin.py.interfaces.Deletesth;
+import com.yuqi.admin.py.interfaces.IselectInter;
 import com.yuqi.admin.py.utils.*;
 
 import java.io.Serializable;
@@ -45,12 +46,13 @@ public class ShoppCarViewSItem extends LinearLayout {
     private ImageView iv_tupian,iv_xuan,iv_jian,iv_jia;
     private EditText et_shulian;
     private TextView tv_shanchu,wbj_danjia,tv_bianji,iv_miaoshu,wbj_shulian;
-    private getShoppingtrolleyBean.ObjectBean.手机Bean data;
+    public getShoppingtrolleyBean.ObjectBean.手机Bean data;
     private Context mContext;
     private Deletesth deletesth;
     private ShoppCarViewSItem shoppCarViewBItem;
     private TextView tijiaodd;
-
+    private boolean xuan = false;
+    private IselectInter iselectInter;
 
     public ShoppCarViewSItem(Context context, getShoppingtrolleyBean.ObjectBean.手机Bean data) {
         this(context,null,data);
@@ -69,6 +71,7 @@ public class ShoppCarViewSItem extends LinearLayout {
 
         initView();
     }
+    public void setSelectI(IselectInter i){this.iselectInter = i;};
     public void setCallback(Deletesth deletesth){
         this.deletesth = deletesth;
     }
@@ -183,8 +186,20 @@ public class ShoppCarViewSItem extends LinearLayout {
             }
         });
 
-
-
+        iv_xuan.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(xuan){
+                    iv_xuan.setImageResource(R.mipmap.xuanzhong);
+                    xuan = false;
+                    iselectInter.push(true,shoppCarViewBItem);
+                }else{
+                    iv_xuan.setImageResource(R.mipmap.meixuanzhong);
+                    xuan = true;
+                    iselectInter.push(false,shoppCarViewBItem);
+                }
+            }
+        });
     }
 
 
