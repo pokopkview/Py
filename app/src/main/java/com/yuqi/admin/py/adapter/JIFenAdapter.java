@@ -6,21 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.yuqi.admin.py.R;
-import com.yuqi.admin.py.activity.SCommodityDetailsActivity;
 import com.yuqi.admin.py.activity.SRedeemNowActivity;
-import com.yuqi.admin.py.bean.APPHomePageBean;
 import com.yuqi.admin.py.bean.APPqueryIntegralcommodityBean;
 import com.yuqi.admin.py.view.ResizableImageView;
 
 /**
  * Created by Administrator on 2017/12/12.
- * 首页商品
+ * 积分商品
  */
 public class JIFenAdapter extends BaseAdapter {
     private Context context;
@@ -33,7 +30,7 @@ public class JIFenAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.getObject().size();
+        return data.getIntegralcommodities().size();
     }
 
     @Override
@@ -62,21 +59,21 @@ public class JIFenAdapter extends BaseAdapter {
             hold = (ViewHold) convertView.getTag();
         }
 
-        String  jifen = data.getObject().get(position).getIntegralPrice()+"";
+        String  jifen = data.getIntegralcommodities().get(position).getIntegralPrice()+"";
         hold.jfsc_jifen.setText(jifen);
-        hold.jfsc_leixing.setText(data.getObject().get(position).getCommodityName());
+        hold.jfsc_leixing.setText(data.getIntegralcommodities().get(position).getCommodityName());
 
         BitmapUtils bitmapUtils = new BitmapUtils(context);
         // 加载网络图片
-        bitmapUtils.display(hold.jfsc_tupian,data.getObject().get(position).getPictureURL());
+        bitmapUtils.display(hold.jfsc_tupian,data.getIntegralcommodities().get(position).getPictureURL());
 
         hold.jfsc_duihuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SRedeemNowActivity.class);
                 Bundle bundle = new Bundle();
-                intent.putExtra("id",data.getObject().get(position).getId()+"");
-                intent.putExtra("CommodityName",data.getObject().get(position).getCommodityName()+"");
+                intent.putExtra("id",data.getIntegralcommodities().get(position).getId()+"");
+                intent.putExtra("CommodityName",data.getIntegralcommodities().get(position).getCommodityName()+"");
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,11 +27,12 @@ import com.yuqi.admin.py.utils.DialogUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created by Administrator on 2017/12/23.
  *
- * 地址 管理 适配器
+ *全部地址管理 适配器
  */
 public class AddressAdapter  extends BaseAdapter {
     private Context context;
@@ -40,6 +42,7 @@ public class AddressAdapter  extends BaseAdapter {
         this.context = context;
         this.data = data;
     }
+
 
     @Override
     public int getCount() {
@@ -69,6 +72,7 @@ public class AddressAdapter  extends BaseAdapter {
             hold.dz_bj =(ImageView) convertView.findViewById(R.id.dz_bj);
             hold.dz_sc =(ImageView) convertView.findViewById(R.id.dz_sc);
             hold.dz_mr =(ImageView) convertView.findViewById(R.id.dz_mr);
+            hold.ll_quanbu = (LinearLayout)convertView.findViewById(R.id.ll_quanbu);
 
             convertView.setTag(hold);
         } else {
@@ -88,7 +92,7 @@ public class AddressAdapter  extends BaseAdapter {
         }else {
             finalHold.dz_mr.setImageResource(R.mipmap.meixuanzhong);
         }
-
+        //编辑地址
         hold.dz_bj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,32 +106,95 @@ public class AddressAdapter  extends BaseAdapter {
                 Intent intent = new Intent(context, SEditors2Activity.class);
                 intent.putExtra("xgdz", (Serializable) xgdz);
                 context.startActivity(intent);
-                data.getObject().clear();
+            }
+        });
+        //设置默认地址
+        final ViewHold finalHold2 = hold;
+        hold.dz_mr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                defaultAddress(data.getObject().get(position),data.getObject().get(position).getId(), finalHold2.dz_mr);
             }
         });
 
+        //删除地址
+        final ViewHold finalHold1 = hold;
         hold.dz_sc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteShippingAddress(data.getObject().get(position).getId());
+                deleteShippingAddress(data.getObject().get(position),data.getObject().get(position).getId(), finalHold1.ll_quanbu);
             }
         });
 
-//        BitmapUtils bitmapUtils = new BitmapUtils(context);
-//        // 加载网络图片
-//        bitmapUtils.display(hold.qrddxx_tupian,data.get(position).getPicture());
-
         return convertView;
     }
+    //设置默认地址
+    private void defaultAddress(DshowShippingAddressALLBean.ObjectBean objectBean, int id, final ImageView dz_mr) {
+        RequestParams params1 = new RequestParams();
+        params1.addQueryStringParameter("id",id+"");
+        params1.addQueryStringParameter("user_id",CommonData.user_id+"");
 
-    private void deleteShippingAddress(int id) {
+        HttpUtils http = new HttpUtils();
+        http.configCurrentHttpCacheExpiry(1000 * 10);
+        http.send(HttpRequest.HttpMethod.POST,
+                CommonData.URL + "defaultAddress.action",
+                params1,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+//                        DialogUtil.start(SEditors2Activity.this);
+                    }
+
+                    @Override
+                    public void onLoading(long total, long current, boolean isUploading) {
+                        super.onLoading(total, current, isUploading);
+                        DialogUtil.finish();
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        DialogUtil.finish();
+                        Log.e(CommonData.REQUEST_SUCCESS, responseInfo.result);
+                        String result = responseInfo.result;
+
+                        Gson gson = new Gson();//初始化
+                        Bean morendizhi = gson.fromJson(result, Bean.class);//result为请求后返回的JSON数据,可以直接使用XUtils获得,NewsData.class为一个bean.如以下数据：
+
+                        String state = morendizhi.getState();
+                        switch (state) {
+                            case "200":
+                                ToastUtil.show(context, "默认设置成功");
+
+                                //情况3.可以刷新
+//                                data.getObject().clear();
+//                                data.getObject().addAll((Collection<? extends DshowShippingAddressALLBean.ObjectBean>) data);
+                                AddressAdapter.super.notifyDataSetInvalidated();
+
+                                break;
+                            case "210":
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                        DialogUtil.finish();
+                        ToastUtil.show(context, CommonData.REQUEST_EXCEOTON);
+                    }
+                });
+    }
+
+
+    //删除地址
+    private void deleteShippingAddress(final DshowShippingAddressALLBean.ObjectBean objectBean, final int id, final LinearLayout ll_quanbu) {
         RequestParams params1 = new RequestParams();
         params1.addQueryStringParameter("id",id+"");
 
         Log.e("请求=",id+"");
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000 * 10);
-        http.send(HttpRequest.HttpMethod.GET,
+        http.send(HttpRequest.HttpMethod.POST,
                 CommonData.URL + "deleteShippingAddress.action",
                 params1,
                 new RequestCallBack<String>() {
@@ -155,6 +222,12 @@ public class AddressAdapter  extends BaseAdapter {
                         switch (state) {
                             case "200":
                                 ToastUtil.show(context, "删除成功");
+                                //情况3.可以刷新
+//                                data.getObject().clear();
+                                ll_quanbu.setVisibility(View.GONE);
+//                                data.getObject().addAll((Collection<? extends DshowShippingAddressALLBean.ObjectBean>) context);
+                                AddressAdapter.this.notifyDataSetInvalidated();
+
                                 break;
                             case "210":
                                 break;
@@ -171,7 +244,10 @@ public class AddressAdapter  extends BaseAdapter {
 
 
     class ViewHold {
+        LinearLayout ll_quanbu;
         TextView dz_xm,dz_sjh,dz_lsgs,dz_xxdz;
         ImageView dz_bj,dz_sc,dz_mr;
     }
+
+
 }

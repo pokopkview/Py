@@ -122,13 +122,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
-                android:text="彭友们将在4小时之内与您联系!"
+                android:text="彭友们将在24小时之内与您联系!"
                 android:layout_below="@+id/ri_content"
                 android:layout_marginTop="30dp"
                 android:padding="12dp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="@dimen/text_large"/>
+                android:textSize="@dimen/text_centre1"/>
 
 
             <TextView

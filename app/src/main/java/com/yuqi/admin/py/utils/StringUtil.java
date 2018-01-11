@@ -119,4 +119,14 @@ public class StringUtil {
         Matcher m = p.matcher(email);
         return m.matches();
     }
+
+    public static void fuzhi(Activity activity, int id, String string){
+        ((TextView) activity.findViewById(id)).setText(string);
+    }
+
+    public static void fuzhi(View view, int id, String string){
+
+        ((TextView)view.findViewById(id)).setText(string);
+
+    }
 }

@@ -92,5 +92,7 @@ public class DingDanBean implements Serializable {
         public void setCommodityName(String commodityName) {
             CommodityName = commodityName;
         }
+
+
     }
 }

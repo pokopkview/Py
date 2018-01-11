@@ -1,10 +1,13 @@
 package com.yuqi.admin.py.bean;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/12/19.
- * 商品
+ *  首页根据不同的状态商品数据  实体类
  */
 public class APPCommodityBean {
 
@@ -101,6 +104,14 @@ public class APPCommodityBean {
         }
 
         public String getPicture() {
+//            try {
+//                String strGBK = URLEncoder.encode(picture, "GBK");
+//                System.out.println(strGBK);
+//                String strUTF8 = URLDecoder.decode(picture, "UTF-8");
+//                System.out.println(strUTF8);
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
             return picture;
         }
 

@@ -22,7 +22,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@mipmap/a_bj"
-                android:scaleType="center"/>
+                android:scaleType="fitXY"/>
             <TextView
                 android:id="@+id/qrddxx_miaoshu"
                 android:layout_width="0dp"

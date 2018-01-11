@@ -2,30 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white1"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/hd_ll"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginRight="5dp"
+        android:layout_marginLeft="@dimen/_high_small"
         android:layout_gravity="center"
+        android:onClick="onLayoutClick"
+        android:background="@drawable/text_background"
+        android:clickable="true"
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/text_background" >
+        android:paddingRight="20dp"  >
 
-            <ImageView
-                android:id="@+id/r1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/yt"/>
+        <com.yuqi.admin.py.view.ResizableImageView
+            android:id="@+id/hd_tupian"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/text_background"
+            android:scaleType="fitXY"
+            android:src="@mipmap/yt"/>
 
-            
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,47 +37,36 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/hd_neirong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lines="2"
+                android:lines="3"
                 android:text="副书记蓝时代峻峰拉放假了发简历激发的了减肥啦"/>
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/text_title"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/hd_jiage"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="￥1099"/>
 
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
                     android:src="@mipmap/gwc" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="拼团价："/>
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@mipmap/gwc" />
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
      </LinearLayout>
-
+    <TextView
+        android:id="@+id/hd_kongbai"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_high_small"
+        android:background="@color/white1"/>
 </LinearLayout>

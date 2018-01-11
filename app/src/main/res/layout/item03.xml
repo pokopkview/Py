@@ -16,10 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:padding="20dp"
         android:onClick="onLayoutClick"
+        android:background="@color/yellow1"
+        android:padding="@dimen/_high_small"
         android:clickable="true"
-        android:textColor="@color/gray2"
-        android:text="开始选购"
-        />
+        android:layout_marginBottom="@dimen/_margin"
+        android:textColor="@color/text_color"
+        android:text="开始体验"/>
 </FrameLayout>

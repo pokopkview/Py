@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,12 @@ public class CycleViewPager extends Fragment implements ViewPager.OnPageChangeLi
 		View view = LayoutInflater.from(getActivity()).inflate(
 				R.layout.view_cycle_viewpager_contet, null);
 
+
 		viewPager = (BaseViewPager) view.findViewById(R.id.viewPager);
+		//获取屏幕像素相关信息
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+
 		indicatorLayout = (LinearLayout) view
 				.findViewById(R.id.layout_viewpager_indicator);
 
@@ -428,11 +434,11 @@ public class CycleViewPager extends Fragment implements ViewPager.OnPageChangeLi
 	private void setIndicator(int selectedPosition) {
 		for (int i = 0; i < indicators.length; i++) {
 			indicators[i]
-					.setBackgroundResource(R.mipmap.icon_point);
+					.setBackgroundResource(R.mipmap.d2);
 		}
 		if (indicators.length > selectedPosition)
 			indicators[selectedPosition]
-					.setBackgroundResource(R.mipmap.icon_point_pre);
+					.setBackgroundResource(R.mipmap.d1);
 	}
 
 	/**

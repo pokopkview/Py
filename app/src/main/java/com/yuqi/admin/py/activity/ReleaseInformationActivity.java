@@ -112,7 +112,6 @@ public class ReleaseInformationActivity extends BaseActivity {
         return "";
     }
     private void submit() {
-
         RequestParams params = new RequestParams();
         params.addQueryStringParameter("name",ri_name.getText()+"");// 名字
         params.addQueryStringParameter("gender",choose1+"");// 性别

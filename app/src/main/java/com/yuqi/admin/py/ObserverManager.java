@@ -40,6 +40,7 @@ public class ObserverManager implements SubjectListener {
         return bean;
     }
 
+    // 添加购物车 商品id  数量
     @Override
     public void addGoods(int goodsID, int goodsnum) {
         List<ShoppingCarBean.ShoppingcarData> lists = bean.getGoodsLis();
@@ -51,7 +52,7 @@ public class ObserverManager implements SubjectListener {
         listener.changeGoods();
         senedMessage();
     }
-
+    // 编辑购物车   数量
     @Override
     public void changeGoodsNum(int goodsID, int goodsnum) {
         List<ShoppingCarBean.ShoppingcarData> lists = bean.getGoodsLis();

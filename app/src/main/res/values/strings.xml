@@ -7,4 +7,8 @@
     <string name="wyfb_1">我需要采购10包铁观音茶叶，希望尽早与您取得联系</string>
     <string name="wyfb_sh"> 正在进行审核，客服将会在4小时之内与您取得联系。</string>
     <string name="dl3">COPYRIGHT 2012-2017 沪ICP备17007398号-1</string>
+    <string name="app_tip">提示</string>
+    <!-- WXPayEntryActivity -->
+    <string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
 </resources>

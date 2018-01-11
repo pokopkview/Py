@@ -90,7 +90,7 @@ public class PublishSuccessfullyActivity extends BaseActivity {
 
                     if(recLen < 1){
                         Intent intent = new Intent();
-                        intent.setClass(PublishSuccessfullyActivity.this,SPurchaseActivity.class);
+                        intent.setClass(PublishSuccessfullyActivity.this,ShouyActivity.class);
                         startActivity(intent);
                         timer.cancel();
                         finish();

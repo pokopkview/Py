@@ -1,6 +1,7 @@
 package com.yuqi.admin.py.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,11 +34,16 @@ public class ToastUtil {
         TextView text = new TextView(ctx);
         text.setBackgroundResource(R.drawable.toast_background);
         text.setTextColor(ctx.getResources().getColor(R.color.yellow1));
+//        text.setTextColor(Color.argb(255, 0, 255, 0));
+
         text.setPadding(30, 30, 30, 30);
         text.setTextSize(12);
+        text.setGravity(Gravity.CENTER);
+        text.setLineSpacing(2,1);//行间距
         text.setText(s);
         mToast.setView(text);
         mToast.setDuration(Toast.LENGTH_LONG);
+        mToast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL , 0, 0);  //设置显示位置
         mToast.show();
         hand.postDelayed(r, 2000);
     }

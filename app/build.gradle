@@ -15,49 +15,52 @@ android {
         multiDexEnabled true
     }
 
-//    buildTypes {
-//        release {
-//            // 是否进行混淆
-//            minifyEnabled false
-//            // 混淆文件的位置
-//            signingConfig signingConfigs.debug
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//
-//        debug {
-//            minifyEnabled false
-//            signingConfig signingConfigs.debug
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//    }
-//    signingConfigs {
-//        debug {
-//            storeFile file('yuqi.jks')
-//            storePassword "abcd1234"
-//            keyAlias "yuqi"
-//            keyPassword "abcd1234"
-//        }
-//        config {
-//            keyAlias 'key'
-//            keyPassword 'android'
-//            storeFile file('/Users/zhanghongwei/filejar/yuqi.jks')
-//            storePassword 'android'
-//        }
-//    }
-//    productFlavors {
-//        tengxun {}
-//
-//        productFlavors.all { flavor ->
-//            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-//        }
-//    }
+    buildTypes {
+        release {
+            // 是否进行混淆
+            minifyEnabled false
+            // 混淆文件的位置
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file('yuqi.jks')
+            storePassword "abcd1234"
+            keyAlias "yuqi"
+            keyPassword "abcd1234"
+        }
+        config {
+            keyAlias 'key'
+            keyPassword 'android'
+            storeFile file('/Users/zhanghongwei/filejar/yuqi.jks')
+            storePassword 'android'
+        }
+    }
+    productFlavors {
+        tengxun {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
-     //添加支付库
+    //添加支付库
     compile files('libs/alipaySdk-20170922.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/xUtils-2.6.14.jar')
+    compile files('libs/uk-co-senab-photoview.jar')
+    compile files('libs/libammsdk.jar')
 }

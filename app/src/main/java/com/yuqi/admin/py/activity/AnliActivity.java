@@ -13,12 +13,13 @@ import com.yuqi.admin.py.utils.ToastUtil;
 
 /**
  * Created by Administrator on 2017/11/23.
- *      客户案例
+ *      平台说明
  */
 public class AnliActivity extends BaseActivity implements View.OnClickListener{
     private ImageView al_anli,back;
 
     Intent intent;
+
 
 
     @Override
@@ -43,13 +44,13 @@ public class AnliActivity extends BaseActivity implements View.OnClickListener{
 
     private void inits() {
         back.setVisibility(View.INVISIBLE);
-        al_anli.setImageResource(R.mipmap.b2);
+        al_anli.setImageResource(R.mipmap.b3);
 
     }
 
     @Override
     public String title_text() {
-        return "客户案例";
+        return "平台说明";
     }
 
     @Override

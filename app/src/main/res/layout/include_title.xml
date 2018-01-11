@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:layout_alignParentTop="true"
-    android:background="@color/yellow1" >
+    android:background="@color/background" >
 
 
         <ImageView
@@ -14,7 +14,7 @@
             android:clickable="true"
             android:padding="15dp"
             android:onClick="onLayoutClick"
-            android:src="@mipmap/m_z" />
+            android:src="@mipmap/z1" />
 
 
         <TextView
@@ -27,7 +27,7 @@
             android:singleLine="true"
             android:text="消息"
             android:textStyle="bold"
-            android:textColor="@color/text_color"
+            android:textColor="@color/yellow1"
             android:textSize="@dimen/text_centre1" />
 
 
@@ -42,6 +42,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:onClick="onLayoutClick"
+            android:textColor="@color/yellow1"
             android:text="提交"
             android:visibility="invisible" />
 

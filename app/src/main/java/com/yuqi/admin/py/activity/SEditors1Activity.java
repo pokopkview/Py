@@ -18,13 +18,16 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.yuqi.admin.py.BaseActivity;
 import com.yuqi.admin.py.R;
-import com.yuqi.admin.py.adapter.AddressAdapter;
 import com.yuqi.admin.py.bean.Bean;
-import com.yuqi.admin.py.bean.DshowShippingAddressALLBean;
+import com.yuqi.admin.py.bean.DingDanBean;
 import com.yuqi.admin.py.bean.XiuGdzBean;
 import com.yuqi.admin.py.data.CommonData;
 import com.yuqi.admin.py.utils.DialogUtil;
+import com.yuqi.admin.py.utils.StringUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/12/21.
@@ -35,14 +38,13 @@ public class SEditors1Activity extends BaseActivity{
     private ImageView moren;
     private TextView submit;
     private boolean moRen =true;
-    private int moR;
-
-    private XiuGdzBean person;
+    private int moR =1;
+    private List<DingDanBean.DingdanBean> commodity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.s_spdd_dizhixinxixiugai);
-
+        commodity = (List<DingDanBean.DingdanBean>) getIntent().getSerializableExtra("dingDan");
         init();
     }
 
@@ -57,19 +59,7 @@ public class SEditors1Activity extends BaseActivity{
         submit.setVisibility(View.VISIBLE);
         submit.setText("完成");
 
-        moren.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (moRen){
-                    moren.setImageResource(R.mipmap.moren);
-                    moR = 0;
-                }else {
-                    moren.setImageResource(R.mipmap.moren1);
-                    moR = 1;
-                }
 
-            }
-        });
 
     }
 
@@ -82,38 +72,56 @@ public class SEditors1Activity extends BaseActivity{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.submit:
-                updateShippingAddressHTTP();
+                String mResult = isContentEmpty();
+                if (!StringUtil.isEmpty(mResult)){
+                    ToastUtil.show(this,mResult);
+                }else {
+                    addShippingAddressHTTP();
+                }
+                break;
+
+            case R.id.moren:
+                    if (moRen){
+                        moren.setImageResource(R.mipmap.moren);
+                        moR = 1;
+                        moRen = true;
+                    }else {
+                        moren.setImageResource(R.mipmap.moren1);
+                        moR = 0;
+                        moRen = false;
+                    }
                 break;
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateShippingAddressHTTP();
+    private String isContentEmpty(){
+        if(StringUtil.isEmpty(StringUtil.getText(this, R.id.shoujianrenxingming))){return "请填写收件人";}
+        if(StringUtil.isEmpty(StringUtil.getText(this, R.id.shoujihao))){return "请填写手机号";}
+        if(StringUtil.isEmpty(StringUtil.getText(this, R.id.shouhuodizhi))){return "请填写隶属公司";}
+        if(StringUtil.isEmpty(StringUtil.getText(this, R.id.xiangxidizhi))){return "请填写详细地址";}
+        return "";
     }
 
-
-    private void updateShippingAddressHTTP() {
+    private void addShippingAddressHTTP() {
         RequestParams params1 = new RequestParams();
         params1.addQueryStringParameter("user_id", CommonData.user_id+"");
         params1.addQueryStringParameter("consignee", shoujianrenxingming.getText().toString());
         params1.addQueryStringParameter("phoneNumber", shoujihao.getText().toString());
         params1.addQueryStringParameter("shippingAddress", shouhuodizhi.getText().toString());
         params1.addQueryStringParameter("detailedAddress", xiangxidizhi.getText().toString());
-        params1.addQueryStringParameter("ifDefaultAddress", moRen+"" );
+        params1.addQueryStringParameter("ifDefaultAddress", moR+"" );
 
-        Log.e("请求=",moRen+"");
+        Log.e("请求=",moRen+"、"+moR);
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000 * 10);
-        http.send(HttpRequest.HttpMethod.GET,
+        http.send(HttpRequest.HttpMethod.POST,
                 CommonData.URL + "addShippingAddress.action",
                 params1,
                 new RequestCallBack<String>() {
                     @Override
                     public void onStart() {
                         super.onStart();
-//                        DialogUtil.start(SEditors2Activity.this);
+                        DialogUtil.start(SEditors1Activity.this);
                     }
 
                     @Override
@@ -134,6 +142,10 @@ public class SEditors1Activity extends BaseActivity{
                         switch (state) {
                             case "200":
                                 ToastUtil.show(SEditors1Activity.this, "地址添加成功");
+                                Intent intent = new Intent();
+                                intent.setClass(SEditors1Activity.this,SEditorsActivity.class);
+                                intent.putExtra("dingDan", (Serializable) commodity);
+                                startActivity(intent);
                                 finish();
                                 break;
                             case "210":

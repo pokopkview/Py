@@ -1,7 +1,10 @@
 package com.yuqi.admin.py.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,7 +29,8 @@ import com.yuqi.admin.py.utils.ToastUtil;
  */
 public class LoginActivity extends BaseActivity {
     private EditText ll_shoujihao ,ll_mima;
-
+    //先定义
+    SharedPreferences sp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +42,12 @@ public class LoginActivity extends BaseActivity {
     private void init() {
         ll_shoujihao = (EditText)findViewById(R.id.ll_shoujihao);
         ll_mima = (EditText)findViewById(R.id.ll_mima);
-        ll_shoujihao.setText("18797765489");
-        ll_mima.setText("123456");
+
+        //1、获取Preferences
+        SharedPreferences settings = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+        //2、取出数据
+        String name = settings.getString("zcname","" );
+        ll_shoujihao.setText(name);
     }
 
 
@@ -118,40 +126,44 @@ public class LoginActivity extends BaseActivity {
                         DialogUtil.finish();
                         Log.e("请求成功后的回调方法", responseInfo.result + "/");
                         String  result =  responseInfo.result;
-                        Gson gson = new Gson();//初始化
-                        LoginBean login = gson.fromJson(result, LoginBean.class);//result为请求后返回的JSON数据,可以直接使用XUtils获得,NewsData.class为一个bean.如以下数据：
+                        boolean a = false;
 
-                        CommonData.accounts = login.getObject().getUser().getAccounts();
-                        CommonData.password = login.getObject().getUser().getPassword();
-                        CommonData.token = (String) login.getObject().getUser().getToken();
-                        CommonData.user_id = login.getObject().getUserinfo().getUser_id();
-                        CommonData.portrait = login.getObject().getUserinfo().getPortrait();
-                        CommonData.nickname = login.getObject().getUserinfo().getNickname();
-                        CommonData.gender = login.getObject().getUserinfo().getGender();
-                        CommonData.mailbox = (String) login.getObject().getUserinfo().getMailbox();
-                        CommonData.phoneNumber = login.getObject().getUserinfo().getPhoneNumber();
-                        CommonData.companyName = (String) login.getObject().getUserinfo().getCompanyName();
-                        CommonData.balance = login.getObject().getUserinfo().getBalance();
-                        CommonData.creationTime = login.getObject().getUserinfo().getCreationTime();
-                        CommonData.company_integral = login.getObject().getUserinfo().getCompany_integral();
 
-                        String state = login.getState();
-                        switch (state){
-                            case "200":
-                                Intent intent = new Intent();
-                                intent.setClass(LoginActivity.this, ShouyActivity.class);
-                                CommonData.state = state;
-                                ToastUtil.show(LoginActivity.this,"登录成功");
-                                startActivity(intent);
-                                finish();
-                                break;
-                            case "500":
-                                ToastUtil.show(LoginActivity.this,"密码错误");
-                                break;
-                            case "404":
-                                ToastUtil.show(LoginActivity.this,"帐号不存在");
-                                break;
-                        }
+                            Gson gson = new Gson();//初始化
+                            LoginBean login = gson.fromJson(result, LoginBean.class);//result为请求后返回的JSON数据,可以直接使用XUtils获得,NewsData.class为一个bean.如以下数据：
+                            String  state = login.getState();
+                            switch (state){
+                                case "200":
+                                    CommonData.accounts = login.getObject().getUser().getAccounts();
+                                    CommonData.password = login.getObject().getUser().getPassword();
+                                    CommonData.token = (String) login.getObject().getUser().getToken();
+                                    CommonData.user_id = login.getObject().getUserinfo().getUser_id();
+                                    CommonData.portrait = login.getObject().getUserinfo().getPortrait();
+                                    CommonData.nickname = login.getObject().getUserinfo().getNickname();
+                                    CommonData.gender = login.getObject().getUserinfo().getGender();
+                                    CommonData.mailbox = (String) login.getObject().getUserinfo().getMailbox();
+                                    CommonData.phoneNumber = login.getObject().getUserinfo().getPhoneNumber();
+                                    CommonData.companyName = (String) login.getObject().getUserinfo().getCompanyName();
+                                    CommonData.balance = login.getObject().getUserinfo().getBalance();
+                                    CommonData.creationTime = login.getObject().getUserinfo().getCreationTime();
+                                    CommonData.company_integral = login.getObject().getUserinfo().getCompany_integral();
+
+                                    Intent intent = new Intent();
+                                    intent.setClass(LoginActivity.this, ShouyActivity.class);
+                                    CommonData.state = state;
+//                                    ToastUtil.show(LoginActivity.this,"登录成功");
+                                    startActivity(intent);
+                                    finish();
+                                    dl();
+                                    break;
+                                case "500":
+                                    ToastUtil.show(LoginActivity.this,"密码错误");
+                                    break;
+                                case "404":
+                                    ToastUtil.show(LoginActivity.this,"帐号不存在");
+                                    break;
+                            }
+
                     }
                     @Override
                     public void onFailure(HttpException error, String msg) {
@@ -159,5 +171,15 @@ public class LoginActivity extends BaseActivity {
                         Log.e("请求异常后的回调方法", "失败="+error.toString() + "/"+ msg);
                     }
                 });
+    }
+
+    private void dl() {
+            sp = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+            //2、让setting处于编辑状态
+            SharedPreferences.Editor editor = sp.edit();
+            //3、存放数据
+            editor.putString("zcname", ll_shoujihao.getText().toString().trim());
+            //4、完成提交
+            editor.commit();
     }
 }

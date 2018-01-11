@@ -45,7 +45,7 @@
             android:id="@+id/t3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正在进行审核，客服将会在4小时之内与您取得联系。"
+            android:text="正在进行审核，客服将会在24小时之内与您取得联系。"
             android:layout_below="@+id/t2"
             android:layout_centerHorizontal="true"
             android:textColor="@color/gray2"

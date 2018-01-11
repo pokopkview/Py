@@ -71,13 +71,13 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginLeft="@dimen/_high_small"
-                                        android:text="李某某"/>
+                                        android:text=" "/>
                                     <TextView
                                         android:id="@+id/qrxd_shoujihao"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="@dimen/_high_small"
-                                        android:text="13568492467"/>
+                                        android:text=" "/>
                                 </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                                         android:layout_weight="1"
                                         android:lines="1"
                                         android:layout_marginLeft="@dimen/_high_small"
-                                        android:text="上海羽琪科技有限公司"/>
+                                        android:text=" "/>
                                 </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                                         android:layout_weight="1"
                                         android:layout_marginLeft="@dimen/_high_small"
                                         android:lines="1"
-                                        android:text="上海市嘉定区华江路994号二楼212室"/>
+                                        android:text=" "/>
                                 </LinearLayout>
                             </LinearLayout>
 

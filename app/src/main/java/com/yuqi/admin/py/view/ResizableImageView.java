@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 /**
  * Created by Administrator on 2017/12/18.
+ * 高度根据使得图片的宽度充满屏幕计算而得
  */
 public class ResizableImageView extends ImageView {
 

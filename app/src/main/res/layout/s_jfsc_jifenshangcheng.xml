@@ -33,42 +33,40 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:maxLength="11"
-            android:layout_marginTop="@dimen/_margin"
+            android:layout_marginTop="@dimen/_high_small"
             android:layout_gravity="center"
             android:background="@drawable/toast_background_mm_h50"
             android:paddingLeft="@dimen/_high"
             android:paddingRight="@dimen/_high"
             android:paddingBottom="@dimen/_high_small"
             android:paddingTop="@dimen/_high_small"
-            android:layout_marginBottom="@dimen/_margin"
+            android:layout_marginBottom="@dimen/_high_small"
             android:text="15608477512"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_high_small"
         android:background="@color/gray1"/>
-    <ScrollView
+
+    <com.yuqi.admin.py.view.MyScrollView
+        android:id="@+id/myScrollView"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/_margin"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="积分商城"
-                android:layout_marginBottom="@dimen/text_title"
-                android:layout_marginTop="@dimen/text_title"
+                android:layout_marginBottom="@dimen/_margin"
+                android:layout_marginTop="@dimen/_margin"
                 android:textSize="@dimen/text_title"
                 android:layout_gravity="center"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginRight="@dimen/_margin"
-                android:layout_marginLeft="@dimen/_margin"
-                android:orientation="vertical">
 
                 <GridView
                     android:id="@+id/GridJfsc"
@@ -78,352 +76,7 @@
                     android:numColumns="2"
                     android:horizontalSpacing="10dp"
                     android:verticalSpacing="10dp"/>
-            </LinearLayout>
-
-
-
-            <!--&lt;!&ndash;积分商城&ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/_margin"-->
-                <!--android:layout_marginRight="@dimen/_margin"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash;网站建设&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="网站搭建"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_wzdj"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-                <!--</LinearLayout>-->
-                <!--&lt;!&ndash;微信开发&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_marginLeft="@dimen/_high_small"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="微信开发"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_wxkf"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-
-                <!--</LinearLayout>-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/_margin"-->
-                <!--android:layout_marginRight="@dimen/_margin"-->
-                <!--android:layout_marginTop="@dimen/_margin"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash;APP开发&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="APP开发"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_appkf"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-                <!--</LinearLayout>-->
-                <!--&lt;!&ndash;视频制作&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_marginLeft="@dimen/_high_small"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="视频制作"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_spzz"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-
-                <!--</LinearLayout>-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/_margin"-->
-                <!--android:layout_marginRight="@dimen/_margin"-->
-                <!--android:layout_marginTop="@dimen/_margin"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash;策划&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="策划"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_ch"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-                <!--</LinearLayout>-->
-                <!--&lt;!&ndash;展会&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_marginLeft="@dimen/_high_small"-->
-                    <!--android:gravity="center"-->
-                    <!--android:background="@drawable/text_background" >-->
-
-                    <!--<com.yuqi.admin.py.view.ResizableImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="1dp"-->
-                        <!--android:layout_marginRight="1dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:src="@mipmap/yt"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="展会"/>-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/text_title"-->
-                        <!--android:layout_height="@dimen/text_title"-->
-                        <!--android:src="@mipmap/jf_jifen"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/_high_small"/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:textColor="@color/yellow1"-->
-                        <!--android:text="5000积分"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/duihuan_zh"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/_margin"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@drawable/toast_background_mm_h"-->
-                        <!--android:paddingLeft="@dimen/text_title"-->
-                        <!--android:paddingRight="@dimen/text_title"-->
-                        <!--android:paddingBottom="@dimen/_high_small"-->
-                        <!--android:paddingTop="@dimen/_high_small"-->
-                        <!--android:text="立即兑换"-->
-                        <!--android:onClick="onLayoutClick"-->
-                        <!--android:clickable="true"-->
-                        <!--android:layout_marginBottom="@dimen/_margin"/>-->
-
-                <!--</LinearLayout>-->
-            <!--</LinearLayout>-->
 
         </LinearLayout>
-    </ScrollView>
+    </com.yuqi.admin.py.view.MyScrollView>
 </LinearLayout>

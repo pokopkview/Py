@@ -1,5 +1,7 @@
 package com.yuqi.admin.py.bean;
 
+import com.lidroid.xutils.http.callback.RequestCallBack;
+
 import java.util.List;
 
 /**
@@ -106,5 +108,7 @@ public class DshowShippingAddressALLBean {
         public void setIfDefaultAddress(int ifDefaultAddress) {
             this.ifDefaultAddress = ifDefaultAddress;
         }
+
+
     }
 }

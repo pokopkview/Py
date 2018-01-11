@@ -46,9 +46,6 @@ public class SIntegralMallActivity extends BaseActivity {
         GridJfsc = (GridView)findViewById(R.id.GridJfsc);
         jfsc_xm = (TextView)findViewById(R.id.jfsc_xm);
         jfsc_dh = (TextView)findViewById(R.id.jfsc_dh);
-
-        jfsc_xm.setText(CommonData.companyName);
-        jfsc_dh.setText(CommonData.phoneNumber);
     }
 
     //综合展示商品
@@ -76,6 +73,8 @@ public class SIntegralMallActivity extends BaseActivity {
     /**积分商城信息*/
     private void APPqueryIntegralcommodityHTTP() {
         RequestParams params = new RequestParams();
+        params.addQueryStringParameter("user_id",CommonData.user_id+"");
+
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000*10);
         Log.e("请求数据=", "积分商城="+params);
@@ -106,6 +105,8 @@ public class SIntegralMallActivity extends BaseActivity {
                             case "200":
                                 //积分商品展示
                                 homePage(APPqueryIntegralcommodity);
+                                jfsc_xm.setText(APPqueryIntegralcommodity.getCompanyName());
+                                jfsc_dh.setText("可用积分:"+APPqueryIntegralcommodity.getCompanyIntegral()+"");
                                 break;
                             case "210":
                                 break;

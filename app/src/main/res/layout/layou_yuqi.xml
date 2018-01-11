@@ -30,10 +30,10 @@
                         android:background="@mipmap/yq1"
                         android:layout_weight="1" />
 
-                    <ImageView
+                    <com.yuqi.admin.py.view.ResizableImageView
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:src="@mipmap/yq2"
+                        android:src="@mipmap/yuy"
                         android:layout_marginTop="@dimen/_margin"
                         android:scaleType="fitCenter"
                         android:layout_weight="1" />
@@ -286,37 +286,49 @@
 
                     </LinearLayout>
 
-                    <com.yuqi.admin.py.view.ResizableImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginTop="30dp"
-                        android:src="@mipmap/yq10"
-                        android:scaleType="fitCenter"
-                        android:layout_weight="1" />
+                    <LinearLayout
+                        android:id="@+id/llImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClick"
+                        android:clickable="true"
+                        android:orientation="vertical">
 
-                    <com.yuqi.admin.py.view.ResizableImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:scaleType="fitCenter"
-                        android:background="@mipmap/yq11"  />
+                        <com.yuqi.admin.py.view.ResizableImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginTop="30dp"
+                            android:src="@mipmap/yq10"
+                            android:scaleType="fitCenter"
+                            android:layout_weight="1" />
 
-                    <com.yuqi.admin.py.view.ResizableImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:scaleType="fitCenter"
-                        android:background="@mipmap/yq12"  />
+                        <com.yuqi.admin.py.view.ResizableImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:scaleType="fitCenter"
+                            android:background="@mipmap/yq11"  />
 
-                    <com.yuqi.admin.py.view.ResizableImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:scaleType="fitCenter"
-                        android:background="@mipmap/yq13"  />
+                        <com.yuqi.admin.py.view.ResizableImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:scaleType="fitCenter"
+                            android:background="@mipmap/yq12"  />
 
-                    <com.yuqi.admin.py.view.ResizableImageView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:scaleType="fitCenter"
-                        android:background="@mipmap/yq14"  />
+                        <com.yuqi.admin.py.view.ResizableImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:scaleType="fitCenter"
+                            android:background="@mipmap/yq13"  />
+
+                        <com.yuqi.admin.py.view.ResizableImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:scaleType="fitCenter"
+                            android:background="@mipmap/yq14"  />
+
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
             </ScrollView>
@@ -324,7 +336,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/_margin"
         android:background="@color/gray2"/>
     <include layout="@layout/include_but"/>
 </LinearLayout>

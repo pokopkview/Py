@@ -18,14 +18,12 @@
             android:id="@+id/rl11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/yellow1" >
+            android:background="@color/background" >
             <!--搜索区域-->
             <LinearLayout
                 android:id="@+id/ll_ss"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginRight="@dimen/_margin"
-                android:layout_marginLeft="@dimen/_margin"
                 android:layout_marginBottom="5dp"
                 android:background="@color/white1"
                 android:focusable="true"
@@ -42,7 +40,7 @@
                     android:layout_marginRight="8dp"
                     android:src="@mipmap/sss"/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -132,7 +130,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_high_small"
                                 android:textSize="@dimen/_margin"
-                                android:text="个人中心"/>
+                                android:text="账户中心"/>
 
                         </LinearLayout>
 
@@ -189,17 +187,20 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/wycz"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:onClick="onClick"
+                            android:clickable="true"
                             android:layout_weight="1">
 
                             <ImageView
                                 android:layout_width="@dimen/simple_btn_height"
                                 android:layout_height="@dimen/simple_btn_height"
-                                android:background="@mipmap/sy_gdfl"
+                                android:background="@mipmap/sy_wycz"
                                 android:gravity="center" />
 
                             <TextView
@@ -207,7 +208,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_high_small"
                                 android:textSize="@dimen/_margin"
-                                android:text="更多分类"/>
+                                android:text="我要充值"/>
 
                         </LinearLayout>
 
@@ -216,32 +217,21 @@
                     <!--图片轮播区域-->
                     <LinearLayout
                         android:id="@+id/iv1"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/_margin"
                         android:layout_marginLeft="@dimen/_margin"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_below="@+id/ll1">
 
                         <fragment
                             android:id="@+id/fragment_cycle_viewpager_content"
                             android:name="com.yuqi.admin.py.view.lib.CycleViewPager"
-                            android:layout_width="match_parent"
-                            android:layout_height="180dip"
-                            tools:layout="@layout/view_cycle_viewpager_contet" />
-
-
-                        <RelativeLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="0dip"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:text="content"/>
-                        </RelativeLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"/>
+                        <!--tools:layout="@layout/view_cycle_viewpager_contet"-->
                     </LinearLayout>
                     <!--采购需求图片区域-->
                     <LinearLayout
@@ -250,25 +240,11 @@
                         android:background="@color/white1"
                         android:layout_margin="@dimen/_margin"
                         android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_large"
-                                android:textStyle="bold"
-                                android:text="采购"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_large"
-                                android:textStyle="bold"
-                                android:textColor="@color/yellow1"
-                                android:text="需求"/>
 
-                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="@dimen/simple_btn_height"
+                            android:layout_height="@dimen/simple_btn_height"
+                            android:src="@mipmap/cgxq"/>
 
                         <View
                             android:layout_width="1dp"
@@ -315,101 +291,219 @@
                         </LinearLayout>
 
                     </LinearLayout>
+                    <!--活动商城区域-->
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/text_centre"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/sy_hdsp"/>
+
+                            <LinearLayout
+                                android:id="@+id/huodongshangpin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_margin"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+
+                    </LinearLayout>
 
                     <!--商品类型选择区域-->
                     <!--<include layout="@layout/include_shangpin"/>-->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginLeft="@dimen/_margin"
-                        android:layout_marginRight="@dimen/_margin"
+                        android:layout_margin="@dimen/_margin"
                         android:background="@color/yellow1"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/simple_btn_height"
                         android:layout_marginLeft="@dimen/_margin"
                         android:layout_marginRight="@dimen/_margin"
+                        android:background="@color/background"
                         android:orientation="horizontal" >
 
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/sy_zh1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="综合"
-                            android:textColor="@color/yellow1"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="综合"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_zh2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/sy_dq1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="电器"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="电器"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_dq2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/sy_sj1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="手机"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="手机"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_sj2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+
+                        <LinearLayout
                             android:id="@+id/sy_xh1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="洗护"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="洗护"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_xh2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/sy_xb1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="箱包"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="箱包"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_xb2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+
+
+                        <LinearLayout
                             android:id="@+id/sy_sp1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="食品"
-                            android:gravity="center"   />
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="食品"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_sp2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:visibility="gone"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/sy_jy1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:onClick="onClick"
                             android:clickable="true"
-                            android:text="家用"
-                            android:gravity="center"   />
-                    </LinearLayout>
+                            android:onClick="onClick"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/yellow1"
+                                android:text="企业"
+                                android:gravity="center"   />
+                            <TextView
+                                android:id="@+id/sy_jy2"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginRight="@dimen/_margin"
+                                android:layout_marginLeft="@dimen/_margin"
+                                android:visibility="gone"
+                                android:background="@color/yellow1"/>
+                        </LinearLayout>
+
+
+                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -419,24 +513,34 @@
                         android:background="@color/gray1"/>
                 </LinearLayout>
 
+
                 <com.yuqi.admin.py.view.MultiGridView
                     android:id="@+id/list"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:divider="@color/transparent"
                     android:numColumns="2"
-                    android:layout_marginRight="@dimen/_margin"
-                    android:layout_marginLeft="@dimen/_margin"
                     android:horizontalSpacing="10dp"
-                    android:verticalSpacing="10dp"/>
+                    android:verticalSpacing="10dp"
+                    android:padding="@dimen/_margin"/>
 
+                <TextView
+                    android:id="@+id/Tv_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"  />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/white1"/>
             </LinearLayout>
         </com.yuqi.admin.py.view.MyScrollView>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/_margin"
         android:background="@color/gray2"/>
 
     <include layout="@layout/include_but" />

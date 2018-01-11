@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lidroid.xutils.BitmapUtils;
 import com.yuqi.admin.py.R;
 import com.yuqi.admin.py.activity.SCommodityDetailsActivity;
 import com.yuqi.admin.py.bean.APPHomePageBean;
+import com.yuqi.admin.py.utils.ImageUtil;
 
 /**
  * Created by Administrator on 2017/12/12.
@@ -62,9 +62,14 @@ public class ShangPinAdapter extends BaseAdapter {
         hold.zh_jiankangtie.setText(data.getObject().getCommodities().get(position).getCommodityName());
         hold.tv_jiage.setText("￥"+String.valueOf(data.getObject().getCommodities().get(position).getCommodityPrice()));
 
-        BitmapUtils bitmapUtils = new BitmapUtils(context);
-        // 加载网络图片
-        bitmapUtils.display(hold.zh_tupian,data.getObject().getCommodities().get(position).getPicture());
+        ImageUtil.loadImg(hold.zh_tupian,data.getObject().getCommodities().get(position).getPicture());
+
+//        BitmapUtils bitmapUtils = new BitmapUtils(context);
+//        // 加载网络图片
+//        String img =  TestUTF.test(data.getObject().getCommodities().get(position).getPicture());
+
+//        Log.e("加载网络图片",img);
+//        bitmapUtils.display(hold.zh_tupian,img);
 
         hold.sp_xiangqing.setOnClickListener(new View.OnClickListener() {
             @Override

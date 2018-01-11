@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:focusableInTouchMode="true">
     <!--头部-->
     <include layout="@layout/include_title"/>
 
@@ -15,10 +14,10 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <com.yuqi.admin.py.view.MyScrollView
-        android:id="@+id/myScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/white1"
+            android:id="@+id/myScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white1"
             android:fillViewport="true" >
 
             <LinearLayout
@@ -31,31 +30,22 @@
                 <LinearLayout
                     android:id="@+id/iv1"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_below="@+id/ll1">
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@color/transparent">
 
                     <fragment
-                        android:id="@+id/fragment_cycle_viewpager_content"
-                        android:name="com.yuqi.admin.py.view.lib.CycleViewPager"
+                        android:id="@+id/fragment_cycle_viewpager_content1"
+                        android:name="com.yuqi.admin.py.view.lib.CycleViewPager1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        tools:layout="@layout/view_cycle_viewpager_contet" />
+                        android:layout_height="wrap_content" />
 
-
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dip"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="content"/>
-                    </RelativeLayout>
                 </LinearLayout>
+
                 <!--物件描述-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -80,6 +70,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:visibility="gone"
                             android:src="@mipmap/fenxiang"/>
                     </LinearLayout>
                     <LinearLayout
@@ -103,9 +94,9 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/text_large"
                             android:layout_gravity="center"
-                            android:src="@mipmap/appzhuanxiang"/>
+                            android:src="@mipmap/appcaigou"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/l3"

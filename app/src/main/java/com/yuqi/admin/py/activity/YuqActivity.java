@@ -44,7 +44,7 @@ public class YuqActivity  extends BaseActivity implements View.OnClickListener{
     }
     private void inits() {
         back.setVisibility(View.INVISIBLE);
-        bt_yuqi.setImageResource(R.mipmap.b3);
+        bt_yuqi.setImageResource(R.mipmap.b2);
     }
 
     @Override
@@ -72,6 +72,11 @@ public class YuqActivity  extends BaseActivity implements View.OnClickListener{
 
             case R.id.bt_women:
                 intent = new Intent(YuqActivity.this, WomActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.llImageView:
+                intent = new Intent(YuqActivity.this, SIntegralMallActivity.class);
                 startActivity(intent);
                 break;
         }

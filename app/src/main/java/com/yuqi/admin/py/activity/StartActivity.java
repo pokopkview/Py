@@ -106,8 +106,6 @@ public class StartActivity extends BaseActivity {
         } else {//请求权限方法
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
             ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
-            ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
-            ActivityCompat.requestPermissions(StartActivity.this, permissions, MY_PERMISSIONS_REQUEST_CALL_CAMERA);
         }
     }
 

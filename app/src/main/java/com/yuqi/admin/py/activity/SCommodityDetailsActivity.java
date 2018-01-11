@@ -4,18 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -28,17 +24,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.yuqi.admin.py.BaseActivity;
-import com.yuqi.admin.py.ObserverManager;
 import com.yuqi.admin.py.R;
-import com.yuqi.admin.py.adapter.QueryCommodityAdapter;
 import com.yuqi.admin.py.bean.APPHomePageBean;
 import com.yuqi.admin.py.bean.APPqueryCommodityBean;
 import com.yuqi.admin.py.bean.DingDanBean;
 import com.yuqi.admin.py.data.CommonData;
 import com.yuqi.admin.py.utils.DialogUtil;
+import com.yuqi.admin.py.utils.ImageUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
 import com.yuqi.admin.py.view.ResizableImageView;
-import com.yuqi.admin.py.view.lib.CycleViewPager;
+import com.yuqi.admin.py.view.lib.CycleViewPager1;
 import com.yuqi.admin.py.view.lib.utils.ViewFactory;
 
 import java.io.Serializable;
@@ -56,38 +51,32 @@ public class SCommodityDetailsActivity extends BaseActivity{
     /**轮播图片*/
     private List<ImageView> views = new ArrayList<ImageView>();
     private List<APPqueryCommodityBean.ObjectBean.CommoditypicturesBean> infos = new ArrayList<APPqueryCommodityBean.ObjectBean.CommoditypicturesBean>();
-    private CycleViewPager cycleViewPager;
+    private CycleViewPager1 cycleViewPager;
 
     private Context mContext;
     private LinearLayout container;
-
-    private QueryCommodityAdapter qcAdapter;
-//    private ListView qcLv;
-    String Picture;//图片
-    Double CommodityPrice;//金额
-
+    //商品详情返回数据存储
     APPqueryCommodityBean queryCommodityBean;
     private List<DingDanBean.DingdanBean> dingDan;
+    private int orderNumber = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.s_spxq_shangpinxiangqing);
         mContext = this;
+        init();
+        //获取首页传来的图片 商品id
         Intent intent1 = getIntent();
         Bundle bundle = intent1.getExtras();
         String Commodity_id1 = bundle.getString("Commodity_id");
-        Picture = bundle.getString("Picture");
 
         int Commodity_id = Integer.parseInt(Commodity_id1);
         //商品详情
-        APPqueryCommodityHttp(Commodity_id,Picture);
-        init();
+        APPqueryCommodityHttp(Commodity_id);
     }
 
 
-
     private void init() {
-//        qcLv = (ListView)findViewById(R.id.qcLv);
         container = (LinearLayout) findViewById(R.id.ll_showpictrue_container);
         spxq_miaoshu = (TextView)findViewById(R.id.spxq_miaoshu);
         spxq_jiage = (TextView)findViewById(R.id.spxq_jiage);
@@ -109,20 +98,31 @@ public class SCommodityDetailsActivity extends BaseActivity{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.Jrgwc://商品详情
+            case R.id.Jrgwc://添加购物车
                 int user_id = CommonData.user_id;
                 int commodity_id = queryCommodityBean.getObject().getCommodity().getId();
-                addShoppingtrolleyHttp(user_id,commodity_id,1);
+                if (spxq_shuliang.getText().toString().trim().equals("")){
+                    orderNumber = 1;
+                }else {
+                    orderNumber = Integer.parseInt(spxq_shuliang.getText().toString().trim());
+                }
+                addShoppingtrolleyHttp(user_id,commodity_id,orderNumber);
+//                ObserverManager manager = ObserverManager.getInstance();
+//                manager.addGoods(commodity_id,orderNumber);//添加购物车
                 break;
             case R.id.Ljgm://立即购买
                 int commodity_id1 = queryCommodityBean.getObject().getCommodity().getId();
-                String orderNumber = spxq_shuliang.getText().toString();//购买数量
+                if (spxq_shuliang.getText().toString().trim().equals("")){//购买数量
+                    orderNumber = 1;
+                }else {
+                    orderNumber = Integer.parseInt(spxq_shuliang.getText().toString().trim());
+                }
                 dingDan = new ArrayList<DingDanBean.DingdanBean>();
                 for (int i = 0; i <1; i++) {
                     DingDanBean.DingdanBean info = new DingDanBean.DingdanBean();
                     info.setCommodity_id(commodity_id1);
-                    info.setOrderNumber(Integer.parseInt(orderNumber));
-                    info.setPicture(Picture);
+                    info.setOrderNumber(orderNumber);
+                    info.setPicture(queryCommodityBean.getObject().getCommoditypictures().get(0).getPicture());
                     info.setSales(queryCommodityBean.getObject().getCommodity().getSales());
                     info.setExpress(queryCommodityBean.getObject().getCommodity().getExpress()+"");
                     info.setCommodityPrice(queryCommodityBean.getObject().getCommodity().getCommodityPrice());
@@ -134,12 +134,12 @@ public class SCommodityDetailsActivity extends BaseActivity{
                 startActivity(intent);
                 break;
 
-            case R.id.submit:
+            case R.id.submit://跳购物车界面
                 intent = new Intent(SCommodityDetailsActivity.this,SShoppingCartActivity.class);
                 startActivity(intent);
                 break;
 
-            case R.id.spxq_jian:
+            case R.id.spxq_jian://商品数据减
                 int jian = Integer.parseInt(spxq_shuliang.getText().toString());
                 if (jian > 1 ){
                      jian = Integer.parseInt(spxq_shuliang.getText().toString()) - 1;
@@ -148,7 +148,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
                     spxq_shuliang.setText(1+"");
                 }
                 break;
-            case R.id.spxq_jia:
+            case R.id.spxq_jia://商品数据加
                 int jia = Integer.parseInt(spxq_shuliang.getText().toString()) + 1;
                 if (jia == 9999)return;
                 spxq_shuliang.setText(jia+"");
@@ -156,14 +156,12 @@ public class SCommodityDetailsActivity extends BaseActivity{
 
         }
     }
-    //天加购物车接口
+    //添加购物车接口
     private void addShoppingtrolleyHttp(int user_id, int commodity_id, int commodityNumber) {
         RequestParams params1 = new RequestParams();
         params1.addQueryStringParameter("user_id", user_id+"");
         params1.addQueryStringParameter("commodity_id", commodity_id+"");
         params1.addQueryStringParameter("commodityNumber", commodityNumber+"");
-        ObserverManager manager = ObserverManager.getInstance();
-        manager.addGoods(commodity_id,commodityNumber);
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000 * 10);
         Log.e("请求数据=", user_id+"、"+commodity_id+"、"+commodityNumber+"、");
@@ -203,39 +201,34 @@ public class SCommodityDetailsActivity extends BaseActivity{
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         DialogUtil.finish();
-                        ToastUtil.show(SCommodityDetailsActivity.this,"网络异常");
+//                        ToastUtil.show(SCommodityDetailsActivity.this,"网络异常");
                     }
                 });
 
     }
 
-    //详细介绍图片设置
-
-    /**
-     * 12.22
-     * @param queryCommodityBean
-     */
+    // 12.22 详细介绍图片设置    底部根据图片张数加载
     private void initImag( APPqueryCommodityBean queryCommodityBean) {
-//        qcAdapter = new QueryCommodityAdapter(SCommodityDetailsActivity.this ,queryCommodityBean);
-//        qcLv.setAdapter(qcAdapter);
         List<APPqueryCommodityBean.ObjectBean.CommodityparticularsBean> bean = queryCommodityBean.getObject().getCommodityparticulars();
         for(APPqueryCommodityBean.ObjectBean.CommodityparticularsBean bean1 : bean) {
             ResizableImageView imageView = new ResizableImageView(mContext);
-            BitmapUtils bitmapUtils = new BitmapUtils(mContext);
-            bitmapUtils.display(imageView,bean1.getPicture());
+//            BitmapUtils bitmapUtils = new BitmapUtils(mContext);
+//            bitmapUtils.display(imageView,bean1.getPicture());
+
+            ImageUtil.loadImg(imageView,bean1.getPicture());
+
             container.addView(imageView);
         }
     }
 
-
-    //商品详情
-    private void APPqueryCommodityHttp(int Commodity_id,String Picture) {
+    //商品详情数据请求
+    private void APPqueryCommodityHttp(int Commodity_id) {
         RequestParams params1 = new RequestParams();
         params1.addQueryStringParameter("Commodity_id", Commodity_id+"");
 
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000 * 10);
-        Log.e("请求数据=", Commodity_id+"");
+        Log.e(CommonData.REQUEST_PARAMETER, Commodity_id+"");
         http.send(HttpRequest.HttpMethod.GET,
                 CommonData.URL + "APPqueryCommodity.action",
                 params1,
@@ -255,8 +248,9 @@ public class SCommodityDetailsActivity extends BaseActivity{
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         DialogUtil.finish();
-                        Log.e("商品详情数据=", responseInfo.result);
+                        Log.e(CommonData.REQUEST_SUCCESS, responseInfo.result);
                         String result = responseInfo.result;
+
                         Gson gson = new Gson();//初始化
                         queryCommodityBean = gson.fromJson(result, APPqueryCommodityBean.class);//存商品数据
                         String state = queryCommodityBean.getState();
@@ -266,21 +260,21 @@ public class SCommodityDetailsActivity extends BaseActivity{
                                 spxq_kuaidi.setText("￥"+queryCommodityBean.getObject().getCommodity().getExpress()+"");
                                 spxq_jiage.setText("￥"+queryCommodityBean.getObject().getCommodity().getCommodityPrice()+"");
                                 spxq_miaoshu.setText(queryCommodityBean.getObject().getCommodity().getCommodityName()+"");
+
+                                //轮播图片设置
+                                configImageLoader();
+                                initialize(queryCommodityBean);
+                                //详细介绍图片设置
+                                initImag(queryCommodityBean);
                                 break;
                             case "210":
                                 break;
                         }
-                        //轮播图片设置
-                        configImageLoader();
-                        initialize(queryCommodityBean);
-                        //详细介绍图片设置
-                        initImag(queryCommodityBean);
-                    }
 
+                    }
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         DialogUtil.finish();
-                        ToastUtil.show(SCommodityDetailsActivity.this,"网络异常");
                     }
                 });
     }
@@ -303,8 +297,8 @@ public class SCommodityDetailsActivity extends BaseActivity{
     }
     @SuppressLint("NewApi")
     private void initialize( APPqueryCommodityBean queryCommodityBean) {
-        cycleViewPager = (CycleViewPager) getFragmentManager()
-                .findFragmentById(R.id.fragment_cycle_viewpager_content);
+        cycleViewPager = (CycleViewPager1) getFragmentManager()
+                .findFragmentById(R.id.fragment_cycle_viewpager_content1);
 
         for(int i = 0; i <  queryCommodityBean.getObject().getCommoditypictures().size(); i ++) {
             APPqueryCommodityBean.ObjectBean.CommoditypicturesBean info = new APPqueryCommodityBean.ObjectBean.CommoditypicturesBean();
@@ -334,7 +328,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
         // 设置循环，在调用setData方法前调用
         cycleViewPager.setCycle(true);
         // 在加载数据前设置是否循环
-        cycleViewPager.setData1(views, infos, mAdCycleViewListener);
+        cycleViewPager.setData(views, infos, mAdCycleViewListener);
         //设置轮播
         cycleViewPager.setWheel(true);
         // 设置轮播时间，默认5000ms
@@ -342,7 +336,7 @@ public class SCommodityDetailsActivity extends BaseActivity{
         //设置圆点指示图标组居中显示，默认靠右
         cycleViewPager.setIndicatorCenter();
     }
-    private CycleViewPager.ImageCycleViewListener mAdCycleViewListener = new CycleViewPager.ImageCycleViewListener() {
+    private CycleViewPager1.ImageCycleViewListener mAdCycleViewListener = new CycleViewPager1.ImageCycleViewListener() {
         @Override
         public void onImageClick(APPHomePageBean.ObjectBean.PicturesBean info, int position, View imageView) {
             if (cycleViewPager.isCycle()) {

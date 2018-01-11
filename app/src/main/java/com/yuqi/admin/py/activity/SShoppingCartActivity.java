@@ -1,11 +1,11 @@
 package com.yuqi.admin.py.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,16 +19,15 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.yuqi.admin.py.BaseActivity;
 import com.yuqi.admin.py.ObserverManager;
 import com.yuqi.admin.py.R;
-import com.yuqi.admin.py.bean.APPqueryCommodityBean;
+import com.yuqi.admin.py.bean.ShoppingCarBean;
 import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
 import com.yuqi.admin.py.data.CommonData;
+import com.yuqi.admin.py.interfaces.Deletesth;
 import com.yuqi.admin.py.utils.DialogUtil;
 import com.yuqi.admin.py.utils.ToastUtil;
 import com.yuqi.admin.py.view.ShoppCarViewBItem;
-import com.yuqi.admin.py.wxapi.ThridSale;
 import com.yuqi.admin.py.adapter.ShangPinAdapter;
-import com.yuqi.admin.py.bean.ShoppingCarBean;
-import com.yuqi.admin.py.view.MultiGridView;
+import com.yuqi.admin.py.view.ShoppCarViewSItem;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -36,7 +35,6 @@ import com.yuqi.admin.py.view.MultiGridView;
  */
 public class SShoppingCartActivity extends BaseActivity{
     private ShangPinAdapter spAdapter;
-    private MultiGridView gwc_gv;
     private TextView Jrgwc;
     private LinearLayout container,none;
 
@@ -44,6 +42,8 @@ public class SShoppingCartActivity extends BaseActivity{
     private LinearLayout mGallery;
     private LayoutInflater mInflater;
     private Context mContext;
+
+    private Deletesth deletesth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,20 +86,13 @@ public class SShoppingCartActivity extends BaseActivity{
                         String state = CarBeanData.getState();
                         switch (state) {
                             case "200":
-//                                addView(CarBeanData);
-//                                ShoppCarViewBItem bItem = new ShoppCarViewBItem(mContext);
                                 initView();
-//                                container.addView();
-
-
-
                                 break;
                             case "210":
                                 none.setVisibility(View.VISIBLE);
                                 break;
                         }
                     }
-
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         DialogUtil.finish();
@@ -110,10 +103,8 @@ public class SShoppingCartActivity extends BaseActivity{
     }
 
     private void init() {
-        gwc_gv = (MultiGridView)findViewById(R.id.gwc_gv);
         none = (LinearLayout) findViewById(R.id.ll_none);
         container = (LinearLayout) findViewById(R.id.layout_container);
-
     }
 
 
@@ -124,17 +115,18 @@ public class SShoppingCartActivity extends BaseActivity{
         }
 
 //        ObserverManager manager = ObserverManager.getInstance();
-//        /**
-//         * 如果没有购物车的数据就显示无数据的页面
-//         *
-//         * 如果有购物车的数据，就去获取购物车的数据并显示到页面上去
-//         */
-//        if(manager.getEntity().getGoodsLis().size()==0){
-//            none.setVisibility(View.VISIBLE);
+        /**
+         * 如果没有购物车的数据就显示无数据的页面
+         * 如果有购物车的数据，就去获取购物车的数据并显示到页面上去
+         * 这里分类首页六种
+         */
+
+//        if(manager.getEntity().getGoodsLis().size()!=0){
+//            none.setVisibility(View.GONE);
+//
 //        }else{
 //                for(ShoppingCarBean.ShoppingcarData data : manager.getEntity().getGoodsLis()){
 //                //在container里面添加通过数据新建的view
-//
 //
 //                }
 //        }
@@ -149,7 +141,14 @@ public class SShoppingCartActivity extends BaseActivity{
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.tv_jrsc:
+                Intent intent = new Intent();
+                intent.setClass(SShoppingCartActivity.this,ShouyActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
 

@@ -11,8 +11,11 @@
     <color name="red1">#eb1600</color>
     <color name="white1">#ffffff</color>
     <color name="text_color">#262626</color>
-
+    <color name="background">#151515</color>
 
     <color name="transparent">#00000000</color>
+    <color name="background1">#cc151515</color>
+    <!--微信用到-->
+    <color name="navpage">#FFE1E8EB</color>
 
 </resources>

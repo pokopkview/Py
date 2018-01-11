@@ -2,6 +2,7 @@ package com.yuqi.admin.py.bean;
 
 /**
  * Created by Administrator on 2017/12/25.
+ * 支付宝订单实体类
  */
 public class AlipayBean {
 

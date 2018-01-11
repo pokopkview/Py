@@ -5,7 +5,7 @@ package com.yuqi.admin.py.interfaces;
  */
 
 public interface SubjectListener {
-    void addGoods(int goodsID,int goodsnum);
-    void changeGoodsNum(int goodsID, int goodsnum);
-    void removeGoods(int goodsID);
+    void addGoods(int goodsID,int goodsnum);//添加
+    void changeGoodsNum(int goodsID, int goodsnum);//数量变化
+    void removeGoods(int goodsID);//删除
 }

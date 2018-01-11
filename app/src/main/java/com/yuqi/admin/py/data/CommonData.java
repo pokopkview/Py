@@ -14,11 +14,12 @@ public class CommonData {
     public static int windowHeight = 0;
 
     // APP_ID 替换为你的应用从官方网站申请到的合法appId
-    public static final String APP_ID = "wxd930ea5d5a258f4f";
+    public static String APP_ID = "wxd220618f0c9781b5";
 
 
     public final static String URL="http://139.224.238.234:8021/pyjh/";
     public final static String alipayURL="http://139.224.238.234:8021/pyjh/api/alipay/";
+    public final static String weixinURL="http://139.224.238.234:8021/pyjh/api/weixin/";
 
 //    public final static String  URL="http://192.168.1.117:7755/pyjh/";
 //    public final static String  alipayURL="http://192.168.1.117:7755/pyjh/api/alipay/";
@@ -44,9 +45,9 @@ public class CommonData {
     public static final int SHIPIAN = 2;
     public static final int LUYIN = 3;
 
-    public static final String REQUEST_PARAMETER= "请求参数" ;
-    public static final String REQUEST_SUCCESS= "请求成功" ;
-    public static final String REQUEST_EXCEOTON= "请求异常" ;
+    public static final String REQUEST_PARAMETER= "请求参数=" ;
+    public static final String REQUEST_SUCCESS= "返回参数=" ;
+    public static final String REQUEST_EXCEOTON= "请求异常=" ;
 
     public static final String LISTVIEW_FIRSTLOAD_NULL = "没有任何记录" ;
     public static final String LISTVIEW_LOADING = "加载中，请稍后" ;

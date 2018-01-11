@@ -1,110 +1,102 @@
-//package com.yuqi.admin.py.activity;
+//package com.yuqi.admin.py.view;
 //
-//import android.annotation.SuppressLint;
-//import android.app.Activity;
-//import android.os.Bundle;
+//import android.content.Context;
+//import android.util.AttributeSet;
+//import android.view.LayoutInflater;
 //import android.view.View;
 //import android.widget.ImageView;
-//import android.widget.Toast;
+//import android.widget.LinearLayout;
+//import android.widget.RelativeLayout;
+//import android.widget.TextView;
 //
+//import com.yuqi.admin.py.ObserverManager;
 //import com.yuqi.admin.py.R;
-//import com.yuqi.admin.py.view.lib.CycleViewPager;
-//import com.yuqi.admin.py.view.lib.bean.ADInfo;
-//import com.yuqi.admin.py.view.lib.utils.ViewFactory;
+//import com.yuqi.admin.py.bean.ShoppingCarBean;
+//import com.yuqi.admin.py.bean.getShoppingtrolleyBean;
+//import com.yuqi.admin.py.interfaces.Deletesth;
 //
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//
 ///**
-// * Created by Administrator on 2017/11/23.
-// *  我要采购
+// * Created by zhanghongwei on 2017/12/22.
 // */
-//public class PurchaseActivity extends Activity {
 //
-//    private List<ImageView> views = new ArrayList<ImageView>();
-//    private List<ADInfo> infos = new ArrayList<ADInfo>();
-//    private CycleViewPager cycleViewPager;
+//public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
 //
-//    private String[] imageUrls = {"http://img.taodiantong.cn/v55183/infoimg/2013-07/130720115322ky.jpg",
-//            "http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg",
-//            "http://pic18.nipic.com/20111215/577405_080531548148_2.jpg",
-//            "http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg",
-//            "http://pic.58pic.com/58pic/12/64/27/55U58PICrdX.jpg"};
+//    private List<ShoppCarViewSItem> viewSItems = new ArrayList<>();
+//    private ImageView iv_select;
+//    private TextView tv_type,tv_success;
+//    private LinearLayout shop_container;
+//    private getShoppingtrolleyBean bean;
+//    private Context mContext;
+//    private boolean isSuccess = false;
+//    private String SUCCESS = "完成";
+//    private String EDIT = "编辑";
+//
+//    private ShoppCarViewBItem shoppCarViewBItem;
+//
+//    public ShoppCarViewBItem(Context context,getShoppingtrolleyBean bean) {
+//        this(context,null,bean);
+//    }
+//
+//    public ShoppCarViewBItem(Context context, AttributeSet attrs,getShoppingtrolleyBean bean) {
+//        this(context, attrs,0,bean);
+//    }
+//
+//    public ShoppCarViewBItem(Context context, AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean bean) {
+//        super(context, attrs, defStyleAttr);
+//        mContext = context;
+//        LayoutInflater.from(context).inflate(R.layout.item_gwc_bianji,this);
+//        shoppCarViewBItem = this;
+//        this.bean = bean;
+//        initView();
+//        CreateView();
+//    }
+//    private void initView(){
+//        iv_select = (ImageView) shoppCarViewBItem.findViewById(R.id.iv_select);
+//        tv_success = (TextView) shoppCarViewBItem.findViewById(R.id.tv_success);
+//        tv_type = (TextView) shoppCarViewBItem.findViewById(R.id.tv_type);
+//        shop_container = (LinearLayout) shoppCarViewBItem.findViewById(R.id.shop_container);
+//        tv_success.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(tv_success.getText().equals(EDIT)){
+//                    tv_success.setText(SUCCESS);
+//                    setEditMode(true);
+//                }else{
+//                    tv_success.setText(EDIT);
+//                    setEditMode(false);
+//                }
+//            }
+//        });
+//    }
+//
+//    private void setEditMode(boolean hiden){
+//        for(ShoppCarViewSItem viewSItem : viewSItems){
+//            viewSItem.setVisi(hiden);
+//        }
+//    }
+//
+//    private void CreateView(){
+//        for(getShoppingtrolleyBean.ObjectEntity.手机Entity data : bean.getObject().get手机()){
+//            if(data != null){
+//                ShoppCarViewSItem shoppCarViewSItem = new ShoppCarViewSItem(mContext,data);
+//                shoppCarViewSItem.setCallback(shoppCarViewBItem);
+//                viewSItems.add(shoppCarViewSItem);
+//                shop_container.addView(shoppCarViewSItem);
+//            }
+//        }
+//    }
+//
 //
 //    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        configImageLoader();
-//        initialize();
-//    }
-//
-//    @SuppressLint("NewApi")
-//    private void initialize() {
-//
-//        cycleViewPager = (CycleViewPager) getFragmentManager()
-//                .findFragmentById(R.id.fragment_cycle_viewpager_content);
-//
-//        for(int i = 0; i < imageUrls.length; i ++){
-//            ADInfo info = new ADInfo();
-//            info.setUrl(imageUrls[i]);
-//            info.setContent("图片-->" + i );
-//            infos.add(info);
-//        }
-//
-//        // 将最后一个ImageView添加进来
-//        views.add(ViewFactory.getImageView(this, infos.get(infos.size() - 1).getUrl()));
-//        for (int i = 0; i < infos.size(); i++) {
-//            views.add(ViewFactory.getImageView(this, infos.get(i).getUrl()));
-//        }
-//        // 将第一个ImageView添加进来
-//        views.add(ViewFactory.getImageView(this, infos.get(0).getUrl()));
-//
-//        // 设置循环，在调用setData方法前调用
-//        cycleViewPager.setCycle(true);
-//
-//        // 在加载数据前设置是否循环
-//        cycleViewPager.setData(views, infos, mAdCycleViewListener);
-//        //设置轮播
-//        cycleViewPager.setWheel(true);
-//
-//        // 设置轮播时间，默认5000ms
-//        cycleViewPager.setTime(2000);
-//        //设置圆点指示图标组居中显示，默认靠右
-//        cycleViewPager.setIndicatorCenter();
-//    }
-//
-//    private CycleViewPager.ImageCycleViewListener mAdCycleViewListener = new CycleViewPager.ImageCycleViewListener() {
-//
-//        @Override
-//        public void onImageClick(ADInfo info, int position, View imageView) {
-//            if (cycleViewPager.isCycle()) {
-//                position = position - 1;
-//
-//            }
-//
-//        }
-//
-//    };
-//
-//    /**
-//     * 配置ImageLoder
-//     */
-//    private void configImageLoader() {
-//        // 初始化ImageLoader
-//        @SuppressWarnings("deprecation")
-//        DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.icon_stub) // 设置图片下载期间显示的图片
-//                .showImageForEmptyUri(R.drawable.icon_empty) // 设置图片Uri为空或是错误的时候显示的图片
-//                .showImageOnFail(R.drawable.icon_error) // 设置图片加载或解码过程中发生错误显示的图片
-//                .cacheInMemory(true) // 设置下载的图片是否缓存在内存中
-//                .cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
-//                // .displayer(new RoundedBitmapDisplayer(20)) // 设置成圆角图片
-//                .build(); // 创建配置过得DisplayImageOption对象
-//
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).defaultDisplayImageOptions(options)
-//                .threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
-//                .discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).build();
-//        ImageLoader.getInstance().init(config);
+//    public void deletGoodsId(int id, ShoppCarViewSItem viewSItem) {
+//        /**
+//         * 网络删除
+//         * 自己写好接口
+//         */
+//        shop_container.removeView(viewSItem);
+//        viewSItems.remove(viewSItem);
 //    }
 //}

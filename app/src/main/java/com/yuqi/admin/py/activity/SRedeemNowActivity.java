@@ -1,5 +1,7 @@
 package com.yuqi.admin.py.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,8 +72,26 @@ public class SRedeemNowActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.dh_lijiduihuan:
+                AlertDialog dialog =  new  AlertDialog.Builder(SRedeemNowActivity.this)
+                        .setTitle("确认操作" )
+                        .setMessage("你正在兑换彭友聚汇"+CommodityName )
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                APPexchangeIntegralcommodityHTTP();
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
 
-                APPexchangeIntegralcommodityHTTP();
+                            }
+                        })
+                        .create();
+                dialog.show();
+
                 break;
             case R.id.ljdh_jian:
                 int jian = Integer.parseInt(ljdh_shulian.getText().toString());
@@ -101,7 +121,7 @@ public class SRedeemNowActivity extends BaseActivity {
 
         HttpUtils http = new HttpUtils();
         http.configCurrentHttpCacheExpiry(1000*10);
-        Log.e("请求数据=", "积分商城立即兑换="+params);
+        Log.e("请求数据=", "积分商城立即兑换="+CommonData.user_id+"integralCommodity_id"+id+"integralNumber"+ljdh_shulian.getText().toString());
 
         http.send(HttpRequest.HttpMethod.POST,
                 CommonData.URL+"APPexchangeIntegralcommodity.action",
@@ -139,7 +159,7 @@ public class SRedeemNowActivity extends BaseActivity {
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         DialogUtil.finish();
-                        ToastUtil.show(SRedeemNowActivity.this,"网络异常");
+//                        ToastUtil.show(SRedeemNowActivity.this,"网络异常");
                     }
                 });
     }

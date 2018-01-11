@@ -12,12 +12,32 @@ public class APPqueryIntegralcommodityBean {
 
 
     /**
-     * object : [{"id":1,"commodityName":"基础网站建设","integralPrice":3000,"introduce":"专业为企业建设开发基础网站--例如官网、门户等","pictureURL":"http://120.77.242.12/image/yantie.jpg"},{"id":2,"commodityName":"微信公众号开发","integralPrice":5000,"introduce":"专业为企业开发微信公众号，只有你想不到到没有做不到的！","pictureURL":"http://120.77.242.12/image/cixuanfurunhuayou.jpg"}]
+     * companyIntegral : 0
+     * integralcommodities : [{"id":3,"commodityName":"APP开发","integralPrice":5000,"introduce":"暂无","pictureURL":"http://120.77.242.12/image/APPkaifa---.jpg"},{"id":4,"commodityName":"策划","integralPrice":5000,"introduce":"暂无","pictureURL":"http://120.77.242.12/image/cehua---.jpg"},{"id":7,"commodityName":"视频制作","integralPrice":5000,"introduce":"暂无","pictureURL":"http://120.77.242.12/image/shipingzhizuo---.jpg"},{"id":8,"commodityName":"网站","integralPrice":5000,"introduce":"暂无","pictureURL":"http://120.77.242.12/image/wangzhan---.jpg"},{"id":9,"commodityName":"微信开发","integralPrice":5000,"introduce":"暂无","pictureURL":"http://120.77.242.12/image/weixinkaifa---.jpg"},{"id":10,"commodityName":"展会","integralPrice":5000,"introduce":"暂未","pictureURL":"http://120.77.242.12/image/zhanhui.jpg"}]
+     * companyName : 羽琪科技
      * state : 200
      */
 
+    private int companyIntegral;
+    private String companyName;
     private String state;
-    private List<ObjectBean> object;
+    private List<IntegralcommoditiesBean> integralcommodities;
+
+    public int getCompanyIntegral() {
+        return companyIntegral;
+    }
+
+    public void setCompanyIntegral(int companyIntegral) {
+        this.companyIntegral = companyIntegral;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public String getState() {
         return state;
@@ -27,21 +47,21 @@ public class APPqueryIntegralcommodityBean {
         this.state = state;
     }
 
-    public List<ObjectBean> getObject() {
-        return object;
+    public List<IntegralcommoditiesBean> getIntegralcommodities() {
+        return integralcommodities;
     }
 
-    public void setObject(List<ObjectBean> object) {
-        this.object = object;
+    public void setIntegralcommodities(List<IntegralcommoditiesBean> integralcommodities) {
+        this.integralcommodities = integralcommodities;
     }
 
-    public static class ObjectBean {
+    public static class IntegralcommoditiesBean {
         /**
-         * id : 1
-         * commodityName : 基础网站建设
-         * integralPrice : 3000
-         * introduce : 专业为企业建设开发基础网站--例如官网、门户等
-         * pictureURL : http://120.77.242.12/image/yantie.jpg
+         * id : 3
+         * commodityName : APP开发
+         * integralPrice : 5000
+         * introduce : 暂无
+         * pictureURL : http://120.77.242.12/image/APPkaifa---.jpg
          */
 
         private int id;

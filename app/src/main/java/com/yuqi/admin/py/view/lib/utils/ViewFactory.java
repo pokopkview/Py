@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yuqi.admin.py.R;
+import com.yuqi.admin.py.view.ResizableImageView;
 
 /**
  * ImageView创建工厂
@@ -17,9 +18,13 @@ public class ViewFactory {
 	 * @return
 	 */
 	public static ImageView getImageView(Context context, String url) {
+//		ResizableImageView imageView = (ResizableImageView)LayoutInflater.from(context).inflate(
+//				R.layout.view_banner1, null);
 		ImageView imageView = (ImageView)LayoutInflater.from(context).inflate(
 				R.layout.view_banner, null);
 		ImageLoader.getInstance().displayImage(url, imageView);
 		return imageView;
 	}
+
+
 }

@@ -1,6 +1,7 @@
 package com.yuqi.admin.py.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.BitmapUtils;
 import com.yuqi.admin.py.R;
 import com.yuqi.admin.py.bean.DingDanBean;
+import com.yuqi.admin.py.utils.ImageUtil;
 
 import java.util.List;
 
@@ -58,14 +60,19 @@ public class DingDanAdapter extends BaseAdapter {
         } else {
             hold = (ViewHold) convertView.getTag();
         }
+        String qrddxx_miaoshu = String.valueOf(data.get(position).getCommodityName());
+        hold.qrddxx_miaoshu.setText(qrddxx_miaoshu);
+        String qrddxx_jine = "￥"+String.valueOf(data.get(position).getCommodityPrice());
+        hold.qrddxx_jine.setText(qrddxx_jine);
+        String qrddxx_shuliang = "x"+String.valueOf(data.get(position).getOrderNumber());
+        hold.qrddxx_shuliang.setText(qrddxx_shuliang);
 
-        hold.qrddxx_miaoshu.setText(String.valueOf(data.get(position).getCommodityName()));
-        hold.qrddxx_jine.setText("￥"+String.valueOf(data.get(position).getCommodityPrice()));
-        hold.qrddxx_shuliang.setText("x"+String.valueOf(data.get(position).getOrderNumber()));
+        ImageUtil.loadImg(hold.qrddxx_tupian,data.get(position).getPicture());
+//        Log.e("图片---",data.get(position).getPicture());
 
-        BitmapUtils bitmapUtils = new BitmapUtils(context);
-        // 加载网络图片
-        bitmapUtils.display(hold.qrddxx_tupian,data.get(position).getPicture());
+//        BitmapUtils bitmapUtils = new BitmapUtils(context);
+//        // 加载网络图片
+//        bitmapUtils.display(hold.qrddxx_tupian,data.get(position).getPicture());
 
         return convertView;
     }

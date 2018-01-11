@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by zhanghongwei on 2017/12/22.
+ * 购物车实体类
  */
 
 public class ShoppingCarBean {
