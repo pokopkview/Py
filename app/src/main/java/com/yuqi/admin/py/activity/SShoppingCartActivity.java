@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class SShoppingCartActivity extends BaseActivity implements IselectInter{
     private ShangPinAdapter spAdapter;
-    private TextView Jrgwc;
+    private TextView Jrgwc,jianshu2,heji2,tijiaodd;
     private LinearLayout container,none;
 
     private getShoppingtrolleyBean CarBeanData;
@@ -48,7 +48,7 @@ public class SShoppingCartActivity extends BaseActivity implements IselectInter{
     private Context mContext;
 
 
-    private List<getShoppingtrolleyBean.ObjectBean.手机Bean> beanList = new ArrayList<>();
+    private List<getShoppingtrolleyBean.ObjectBean> beanList = new ArrayList<>();
     private ShoppCarViewBItem mItem;
     private Deletesth deletesth;
 
@@ -89,6 +89,13 @@ public class SShoppingCartActivity extends BaseActivity implements IselectInter{
                         Log.e("购物车=", responseInfo.result);
                         String result = responseInfo.result;
                         Gson gson = new Gson();//初始化
+                        while(result.indexOf("\":[")!=-1){
+                            int i = result.indexOf("\":[");
+                            result = result.replace(result.substring(i-3,i+3),"");
+                        }
+                        result = result.replace("]","");
+                        result = result.replace("\"object\":{","\"object\":[");
+                        result = result.replace("},\"state\"","],\"state\"");
                         CarBeanData = gson.fromJson(result, getShoppingtrolleyBean.class);//存商品数据
                         String state = CarBeanData.getState();
                         switch (state) {
@@ -112,13 +119,29 @@ public class SShoppingCartActivity extends BaseActivity implements IselectInter{
     private void init() {
         none = (LinearLayout) findViewById(R.id.ll_none);
         container = (LinearLayout) findViewById(R.id.layout_container);
+        jianshu2 = (TextView)findViewById(R.id.jianshu2);
+        heji2 = (TextView)findViewById(R.id.heji2);
+        tijiaodd = (TextView)findViewById(R.id.tijiaodd);
     }
 
 
     private void initView() {
+        List<getShoppingtrolleyBean.ObjectBean> beans = new ArrayList<>();
         if(CarBeanData != null) {
-            mItem = new ShoppCarViewBItem(mContext, CarBeanData,this);
-            container.addView(mItem);
+            String type = "";
+            for(getShoppingtrolleyBean.ObjectBean bean : CarBeanData.getObject()) {
+                if(!bean.getTypeName().equals(type)){
+                    if(beans.size() != 0) {
+                        mItem = new ShoppCarViewBItem(mContext, beans, this);
+                        container.addView(mItem);
+                    }
+                    beans = new ArrayList<>();
+                    beans.add(bean);
+                    type = bean.getTypeName();
+                }else{
+                    beans.add(bean);
+                }
+            }
         }
 
 //        ObserverManager manager = ObserverManager.getInstance();
@@ -177,6 +200,17 @@ public class SShoppingCartActivity extends BaseActivity implements IselectInter{
          *
          * 如果是全选，就直接把
          */
+        double tatol = 0;
+        int numt = 0;
+        for(getShoppingtrolleyBean.ObjectBean bean : beanList){
+            tatol += (double)bean.getCommodityNumber()*bean.getCommodityPrice();
+            numt += bean.getCommodityNumber();
+        }
+        jianshu2.setText(numt+"");
+        heji2.setText("￥"+tatol);
+
+
+
     }
 
     private void allPick(boolean pick){

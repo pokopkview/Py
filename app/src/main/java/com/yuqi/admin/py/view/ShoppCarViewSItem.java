@@ -46,23 +46,24 @@ public class ShoppCarViewSItem extends LinearLayout {
     private ImageView iv_tupian,iv_xuan,iv_jian,iv_jia;
     private EditText et_shulian;
     private TextView tv_shanchu,wbj_danjia,tv_bianji,iv_miaoshu,wbj_shulian;
-    public getShoppingtrolleyBean.ObjectBean.手机Bean data;
+    public getShoppingtrolleyBean.ObjectBean data;
     private Context mContext;
     private Deletesth deletesth;
     private ShoppCarViewSItem shoppCarViewBItem;
     private TextView tijiaodd;
     private boolean xuan = false;
     private IselectInter iselectInter;
+    private LinearLayout iv;
 
-    public ShoppCarViewSItem(Context context, getShoppingtrolleyBean.ObjectBean.手机Bean data) {
+    public ShoppCarViewSItem(Context context, getShoppingtrolleyBean.ObjectBean data) {
         this(context,null,data);
     }
 
-    public ShoppCarViewSItem(Context context, @Nullable AttributeSet attrs,getShoppingtrolleyBean.ObjectBean.手机Bean data) {
+    public ShoppCarViewSItem(Context context, @Nullable AttributeSet attrs,getShoppingtrolleyBean.ObjectBean data) {
         this(context, attrs,0,data);
     }
 
-    public ShoppCarViewSItem(Context context, @Nullable AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean.ObjectBean.手机Bean data) {
+    public ShoppCarViewSItem(Context context, @Nullable AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean.ObjectBean data) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         shoppCarViewBItem = this;
@@ -78,6 +79,18 @@ public class ShoppCarViewSItem extends LinearLayout {
 
     public void setVisi(boolean hiden){
         //这里你就协商你需要隐藏或是展现的的控件啊
+        if (hiden){
+            iv.setVisibility(View.VISIBLE);
+            tv_shanchu.setVisibility(View.VISIBLE);
+            wbj_danjia.setVisibility(View.GONE);
+            wbj_shulian.setVisibility(View.GONE);
+        }else {
+            iv.setVisibility(View.GONE);
+            tv_shanchu.setVisibility(View.GONE);
+            wbj_danjia.setVisibility(View.VISIBLE);
+            wbj_shulian.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void initView(){
@@ -91,7 +104,7 @@ public class ShoppCarViewSItem extends LinearLayout {
         tv_shanchu = (TextView) findViewById(R.id.tv_shanchu);
         wbj_danjia = (TextView) findViewById(R.id.wbj_danjia);
         wbj_shulian = (TextView) findViewById(R.id.wbj_shulian);
-
+        iv = (LinearLayout)findViewById(R.id.iv);
 
         /**
          * 将data的数据设定到上面的控件上去，并添加相对于的点击事件
@@ -189,19 +202,34 @@ public class ShoppCarViewSItem extends LinearLayout {
         iv_xuan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(xuan){
+                if(!xuan){
                     iv_xuan.setImageResource(R.mipmap.xuanzhong);
-                    xuan = false;
+                    xuan = true;
                     iselectInter.push(true,shoppCarViewBItem);
                 }else{
                     iv_xuan.setImageResource(R.mipmap.meixuanzhong);
-                    xuan = true;
+                    xuan = false;
                     iselectInter.push(false,shoppCarViewBItem);
                 }
             }
         });
     }
 
+    public void setSelect(boolean select){
+        if(select){
+            if(!xuan){
+                iv_xuan.setImageResource(R.mipmap.xuanzhong);
+                xuan = true;
+                iselectInter.push(true,shoppCarViewBItem);
+            }
+        }else{
+            if(xuan){
+                iv_xuan.setImageResource(R.mipmap.meixuanzhong);
+                xuan = false;
+                iselectInter.push(false,shoppCarViewBItem);
+            }
+        }
+    }
 
     private void deletesthHTTP() {
         RequestParams params1 = new RequestParams();

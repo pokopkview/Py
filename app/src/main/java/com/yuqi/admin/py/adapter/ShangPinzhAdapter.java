@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.yuqi.admin.py.R;
 import com.yuqi.admin.py.activity.SCommodityDetailsActivity;
 import com.yuqi.admin.py.bean.APPCommodityBean;
@@ -64,7 +65,9 @@ public class ShangPinzhAdapter extends BaseAdapter {
         hold.zh_jiankangtie.setText(data.getObject().get(position).getCommodityName());
         hold.tv_jiage.setText("￥"+String.valueOf(data.getObject().get(position).getCommodityPrice()));
 
-        ImageUtil.loadImg(hold.zh_tupian,data.getObject().get(position).getPicture());
+        Glide.with(context).load(data.getObject().get(position).getPicture()).placeholder(R.mipmap.icon_stub).error(R.mipmap.icon_error).into(hold.zh_tupian);
+
+//        ImageUtil.loadImg(hold.zh_tupian,data.getObject().get(position).getPicture());
 //        BitmapUtils bitmapUtils = new BitmapUtils(context);
 //        // 加载网络图片
 //        String img =  TestUTF.test(data.getObject().get(position).getPicture());

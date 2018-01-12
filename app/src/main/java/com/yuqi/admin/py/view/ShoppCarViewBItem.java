@@ -26,7 +26,7 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
     private ImageView iv_select;
     private TextView tv_type,tv_success;
     private LinearLayout shop_container ,iv_leixing;
-    private getShoppingtrolleyBean bean;
+    private List<getShoppingtrolleyBean.ObjectBean> bean;
     private Context mContext;
 
     private IselectInter iselectInter;
@@ -36,21 +36,21 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
     private String SUCCESS = "完成";
     private String EDIT = "编辑";
 
-    public ShoppCarViewBItem(Context context, getShoppingtrolleyBean bean, IselectInter iselectInter) {
-        this(context,null,bean,iselectInter);
+    public ShoppCarViewBItem(Context context, List<getShoppingtrolleyBean.ObjectBean> beans, IselectInter iselectInter) {
+        this(context,null,beans,iselectInter);
     }
 
-    public ShoppCarViewBItem(Context context, AttributeSet attrs,getShoppingtrolleyBean bean, IselectInter iselectInter) {
-        this(context, attrs,0,bean,iselectInter);
+    public ShoppCarViewBItem(Context context, AttributeSet attrs,List<getShoppingtrolleyBean.ObjectBean> beans, IselectInter iselectInter) {
+        this(context, attrs,0,beans,iselectInter);
     }
 
-    public ShoppCarViewBItem(Context context, AttributeSet attrs, int defStyleAttr,getShoppingtrolleyBean bean, IselectInter iselectInter) {
+    public ShoppCarViewBItem(Context context, AttributeSet attrs, int defStyleAttr,List<getShoppingtrolleyBean.ObjectBean> beans, IselectInter iselectInter) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         LayoutInflater.from(context).inflate(R.layout.item_gwc_bianji,this);
         this.iselectInter = iselectInter;
         shoppCarViewBItem = this;
-        this.bean = bean;
+        this.bean = beans;
         initView();
         CreateView();
     }
@@ -60,14 +60,38 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
         tv_type = (TextView) shoppCarViewBItem.findViewById(R.id.tv_type);//类型
         shop_container = (LinearLayout) shoppCarViewBItem.findViewById(R.id.shop_container);
         iv_leixing = (LinearLayout) shoppCarViewBItem.findViewById(R.id.iv_leixing);
-        if (bean.getObject().get手机() != null){
+        if (bean != null){
             iv_leixing.setVisibility(View.VISIBLE);
-            tv_type.setText("手机");
+            tv_type.setText(bean.get(0).getTypeName());
+//
             tv_success.setText("编辑");
         }else {
             iv_leixing.setVisibility(View.GONE);
             return;
         }
+
+        iv_select.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(iv_select.getTag()==null){
+                    iv_select.setImageResource(R.mipmap.xuanzhong);
+                    iv_select.setTag(R.mipmap.xuanzhong);
+                    setChildSelect(true);
+                }else{
+                    if((int)iv_select.getTag() == R.mipmap.xuanzhong){
+                        iv_select.setImageResource(R.mipmap.meixuanzhong);
+                        iv_select.setTag(R.mipmap.meixuanzhong);
+                        setChildSelect(false);
+                    }else{
+                        iv_select.setImageResource(R.mipmap.xuanzhong);
+                        iv_select.setTag(R.mipmap.xuanzhong);
+                        setChildSelect(true);
+                    }
+                }
+
+
+            }
+        });
 
         tv_success.setOnClickListener(new OnClickListener() {
             @Override
@@ -83,6 +107,12 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
         });
     }
 
+    private void setChildSelect(boolean select){
+        for(ShoppCarViewSItem item : viewSItems){
+            item.setSelect(select);
+        }
+    }
+
     private void setEditMode(boolean hiden){
         for(ShoppCarViewSItem viewSItem : viewSItems){
             viewSItem.setVisi(hiden);
@@ -91,12 +121,14 @@ public class ShoppCarViewBItem extends RelativeLayout implements Deletesth {
 
     private void CreateView(){
 
-        for(getShoppingtrolleyBean.ObjectBean.手机Bean data : bean.getObject().get手机()){
+        for(getShoppingtrolleyBean.ObjectBean data : bean){
             if(data != null){
                 //这里根据数据加载
                 ShoppCarViewSItem shoppCarViewSItem = new ShoppCarViewSItem(mContext,data);
                 shoppCarViewSItem.setCallback(shoppCarViewBItem);
+                shoppCarViewSItem.setSelectI(iselectInter);
                 viewSItems.add(shoppCarViewSItem);
+
                 shop_container.addView(shoppCarViewSItem);
             }else {
                 LinearLayout  none = (LinearLayout) findViewById(R.id.ll_none);

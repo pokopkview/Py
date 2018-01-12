@@ -133,6 +133,7 @@ public class MyPendingPaymentActivity extends BaseActivity{
             wait_dingdanhao.setText("订单编号:"+bean.get(i).getOrder_number());
             wait_shijian.setText(bean.get(i).getCreateTime());
             ImageUtil.loadImg(wait_tupian, commodityPictures.get(i));
+
             wait_miaoshu.setText(commodityName.get(i));
             double a = bean.get(i).getOrderPrice()/counts.get(i);
             wait_jiage.setText("￥"+a);//单价价格
